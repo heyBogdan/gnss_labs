@@ -1,4 +1,114 @@
 body{
 	padding:0;
 	margin:0;
+    overflow-x:hidden;
+}
+.start{
+    &_block{
+        height:95vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-around;
+        padding-left: 15%;
+        animation:text 1.5s;
+        &__bg-image{
+           position:absolute;
+           left: 50vw;
+           top:10vh;
+           height: 110vh;
+           animation:planet 2s;
+        }
+        &_content{
+            display: inline-block;
+            text-transform:uppercase;
+            &__title{
+                
+                font-size: 6rem;
+                letter-spacing: 0.1vw;
+                font-weight: 200;
+                       
+            }
+            &__text{
+                ;
+                font-size: 2rem;
+                font-weight: 100;
+            }
+            &__btn{
+                display: inline-block;
+                width: 200px;
+                height: 5vh;
+                border: 2px solid #666;
+                font-weight: 600;
+                font-size: 1.5rem;
+                letter-spacing:0.2vw;
+                text-align: center;
+                line-height: 4.5vh;
+                color: #666;
+                margin-top: 2.5vh;
+                cursor:pointer;
+                transition:all 0.3s;
+
+                &:hover{
+                        color:#fff;
+                        background-color:#555;
+                        text-decoration:none;
+                        transition:all 0.3s;
+                }
+            
+            }
+        }
+    }
+}
+@keyframes planet{
+    0% {
+        left:70vw;
+        top:70vw;
+        opacity:0;
+    }
+    30%{
+        opacity:0;
+    }
+    100%{
+      left: 50vw;
+      top:10vh;
+      opacity:1;
+    }
+}
+@keyframes text{
+    0%{
+        margin-left:-70%;
+        opacity:0;
+    }
+    100{
+        margin-left:0%;
+        opacity:1;
+    }
+}
+
+
+@media (max-width:1366px){
+  .start{
+    &_block{
+        &_content{
+            &__title{                
+                font-size: 4.5rem;                       
+            }
+            &__text{
+                font-size: 1.7rem;
+            }
+        }
+    }
+}  
+}
+
+
+.navbar-nav>.active>a, .navbar-inverse, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+    background-color:#08172a!important;
+}
+.navbar-inverse .navbar-nav>li>a{
+    color:#fff;
+}
+.dropdown-menu>li>a {
+    line-height: 3.5;
+    text-transform: uppercase;
 }

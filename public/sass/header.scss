@@ -1,5 +1,6 @@
-$gradient:linear-gradient(to right, #262c37 0%,#279ae1 100%);
+$gradient:linear-gradient(to right, #262c37 0%,#3063ad 100%);
 .header{
 	background: $gradient; 
 	color:white;
+    margin-bottom:0!important;
 }

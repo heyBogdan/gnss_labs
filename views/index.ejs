@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>GNSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/bundle.min.css' />
   </head>
   <body>
   	<% include ../partials/header %>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p><%= title2 %></p>
+    <div class='start_block'>
+      <img class="start_block__bg-image" src="/img/earth-png-25612.png">
+      <div class="start_block_content">
+        <h2 class='start_block_content__title'><b>Г</b>лобальные<br> <b>н</b>авигационные<br> <b>с</b>путниковые<br> <b>с</b>истемы</h2>
+        <p class='start_block_content__text'>Удалённые лабораторные практикумы</p>
+        <div class="start_block_content__btn">Описание</div>
+      </div>
+
+    
+    </div>
     <% include ../partials/footer %>
   </body>
   <script src="/bundle.min.js"></script>
