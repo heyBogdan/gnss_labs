@@ -17,6 +17,7 @@ body{
            top:10vh;
            height: 110vh;
            animation:planet 2s;
+           z-index: -1;
         }
         &_content{
             display: inline-block;
@@ -100,7 +101,20 @@ body{
     }
 }  
 }
-
+@media (max-width:768px){
+  .start{
+    &_block{
+        &_content{
+            &__title{                
+                font-size: 3rem;                       
+            }
+            &__text{
+                font-size: 1rem;
+            }
+        }
+    }
+}  
+}
 
 .navbar-nav>.active>a, .navbar-inverse, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
     background-color:#08172a!important;

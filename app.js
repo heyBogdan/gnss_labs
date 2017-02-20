@@ -10,7 +10,6 @@ var routes = require('./routes');
 
 var users = require('./routes/user');
 
-console.log('piiiiiiiiiiidr',routes);
 var app = express();
 
 // view engine setup

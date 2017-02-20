@@ -1,1 +1,50 @@
-sosi
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GNSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/bundle.min.css' />
+  </head>
+  <body>
+  	<% include ../partials/header %>
+
+  	<div class="container lab">
+  	<h4>Лабораторная работа №1</h4>
+  	<p>"Исследование дальномерных кодов сигналов ГНСС"</p>
+<ul class="nav nav-tabs">
+  <li class=""><a href="#theory" data-toggle="tab" aria-expanded="false">Теория</a></li>
+  <li class=""><a href="#practice" data-toggle="tab" aria-expanded="false">Практика</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade" id="theory">
+    <p><strong>Цель работы — изучение спектральных и автокорреляционных свойств
+псевдослучайных последовательностей, использующихся в качестве дальномерных кодов в
+современных глобальных навигационных спутниковых системах (ГНСС).</strong></p>
+	<p>Большинство ГНСС используют псевдослучайные последовательности, которые
+могут быть сформированы на основе регистров сдвига с обратными связями (GPS L1 C/A,
+L2C, L5, ГЛОНАСС L1/L2 СТ, L3, BeiDou B1I, B2I и т.д.). Также встречаются
+псевдослучайные последовательности, задаваемые таблично («случайные»
+последовательности или «memory codes») (GALILEO E1b/E1c).</p>
+<p>
+	Рассмотрим в качестве примера дальномерный код сигнала ГЛОНАСС L1/L2 СТ.
+Этот дальномерный код представляет собой последовательность максимальной длины (М-
+последовательность), задаваемую образующим полиномом вида: 1+x5+x9 . Данному
+образующему полному момжно сопоставить регистр сдвига с обратными связями,
+приведенный на рисунке 1 (Стрелкой указано направление сдвига). Начальное состояние
+регистра сдвига: «111111111».
+</p>
+<div class="image">
+<img src="/img/labs/gnss-signals/Register059.png"/>
+</div>  
+  </div>
+  <div class="tab-pane fade" id="practice">
+    <p>
+    	<a class="btn default" onclick= "genMcode512()">М-последовательность 512</a>
+    </p>
+  </div>
+</div>
+  	</div>
+  	<% include ../partials/footer %>
+  </body>
+  <script src="/bundle.min.js"></script>
+</html>
