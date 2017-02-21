@@ -1,23 +1,32 @@
 .lab{
-	    text-align: center;
-	    >h4{
-	    	margin-top: 50px;
-	    }
-	    >p{
-	    	font-size:1.7rem;
-	    	margin-bottom: 	50px;
-	    	text-transform: uppercase;
+	text-align: center;
+	>h4{
+		margin-top: 50px;
+	}
+	>p{
+		font-size:1.7rem;
+		margin-bottom: 	50px;
+		text-transform: uppercase;
+	}
+	.tab-pane{
+		font-size:1.5rem;
+		text-align: justify;
+		padding-top: 20px;
+	}
+	.image{
+		text-align: center;
+		img{
+		width:70%;
+		}
+	}
+	&__register{
+		margin:25px 0;
+	}
+	&__chart{
+		position:relative;
+		margin:50px auto;
+		width:80%;
 
-	    }
-	    .tab-pane{
-	    	font-size:1.5rem;
-	    	text-align: justify;
-	    	padding-top: 20px;
-	    }
-	    .image{
-	    	text-align: center;
-	    	img{
-	    	width:70%;
-	    	}
-	    }
+	}
+
 }
