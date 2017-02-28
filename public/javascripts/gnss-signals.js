@@ -17,25 +17,28 @@ function genMcode512(startReg){
 
 	return mCode;
 }
-function autoCorr(input){
-	var N = input.length,
+function corr(input1Arg,input2Arg){
+	var input1, input2;
+	if(input1Arg.length >= input2Arg.length){
+		input1 = input1Arg;
+		input2 = input2Arg;
+	}else{
+		input1 = input2Arg;
+		input2 = input1Arg;
+	}
+
+	var N = input1.length,
 		output = [],
         norm, sum,  i, j;
     
     for (i = 0; i < 2*N; i++) {
         sum = 0;
         for (j = 0; j < N; j++) {
-            sum += (input[j] * (input[j-N+i] || 0));
+            sum += (input2[j] * (input1[j-N+i] || 0));
         }
-        if (i === N) norm = sum;
         output[i] = sum;
     }
-
-    for (i = 0; i < 2*N; i++) {
-    	output[i] = output[i]/norm;
-    }	
-
-    console.log('corr', output)
+    console.log(output);
     return output;
 }
 
@@ -120,7 +123,7 @@ function mCode512(){
 		xArgs512 = xArgs(512),
 		xArgs1024 = xArgs(1024);
 
-	var aCorr = autoCorr(mCode512);
+	var aCorr = corr(mCode512,mCode512);
 	
 	var ctx1 = document.getElementById("myChart1"),
 		ctx2 = document.getElementById("myChart2"),
@@ -128,8 +131,8 @@ function mCode512(){
 
 	var color = "rgba(" + random(255,0) + ',' + random(255,0) + ',' + random(255,0) + ',1)';
 
-	var fft = new FFT(512, 44100);
-    fft.forward(mCode512);
+	var fft = new FFT(1024, 44100);
+    fft.forward(aCorr);
     var spectrum = fft.spectrum;
 
     console.log(spectrum);

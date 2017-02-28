@@ -21,11 +21,11 @@ const paths = {
     src: [
         './node_modules/jquery/dist/jquery.min.js',
         './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
-        // './node_modules/nouislider/distribute/nouislider.min.js',
-        './node_modules/chart.js/dist/Chart.min.js',
-        './public/javascripts/*.js'
+        './node_modules/nouislider/distribute/nouislider.min.js',
+        './node_modules/chart.js/dist/Chart.min.js'
+
     ],
-    dist: './dist/'
+    dist: './dist/js/'
   },
   libs: {
     src: './index.js',

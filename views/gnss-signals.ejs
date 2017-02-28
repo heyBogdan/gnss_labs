@@ -8,7 +8,7 @@
   <body>
   	<% include ../partials/header %>
 
-  	<div class="container lab">
+  	<div class="container lab-gnss-signals">
   	<h4>Лабораторная работа №1</h4>
   	<p>"Исследование дальномерных кодов сигналов ГНСС"</p>
       <ul class="nav nav-tabs">
@@ -17,29 +17,46 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade" id="theory">
-          <p><strong>Цель работы — изучение спектральных и автокорреляционных свойств
-      псевдослучайных последовательностей, использующихся в качестве дальномерных кодов в
-      современных глобальных навигационных спутниковых системах (ГНСС).</strong></p>
-      	<p>Большинство ГНСС используют псевдослучайные последовательности, которые
-      могут быть сформированы на основе регистров сдвига с обратными связями (GPS L1 C/A,
-      L2C, L5, ГЛОНАСС L1/L2 СТ, L3, BeiDou B1I, B2I и т.д.). Также встречаются
-      псевдослучайные последовательности, задаваемые таблично («случайные»
-      последовательности или «memory codes») (GALILEO E1b/E1c).</p>
-      <p>
-      	Рассмотрим в качестве примера дальномерный код сигнала ГЛОНАСС L1/L2 СТ.
-      Этот дальномерный код представляет собой последовательность максимальной длины (М-
-      последовательность), задаваемую образующим полиномом вида: 1+x5+x9 . Данному
-      образующему полному момжно сопоставить регистр сдвига с обратными связями,
-      приведенный на рисунке 1 (Стрелкой указано направление сдвига). Начальное состояние
-      регистра сдвига: «111111111».
-      </p>
-      <div class="image">
-      <img src="/img/labs/gnss-signals/Register059.png"/>
-      </div>  
+          <p>
+            <strong>
+              Цель работы — изучение спектральных и автокорреляционных свойств
+              псевдослучайных последовательностей, использующихся в качестве дальномерных кодов в
+              современных глобальных навигационных спутниковых системах (ГНСС).
+            </strong>
+          </p>
+          <p>
+            Большинство ГНСС используют псевдослучайные последовательности, которые
+            могут быть сформированы на основе регистров сдвига с обратными связями (GPS L1 C/A,
+            L2C, L5, ГЛОНАСС L1/L2 СТ, L3, BeiDou B1I, B2I и т.д.). Также встречаются
+            псевдослучайные последовательности, задаваемые таблично («случайные»
+            последовательности или «memory codes») (GALILEO E1b/E1c).
+          </p>
+          <p>
+            Рассмотрим в качестве примера дальномерный код сигнала ГЛОНАСС L1/L2 СТ.
+            Этот дальномерный код представляет собой последовательность максимальной длины (М-
+            последовательность), задаваемую образующим полиномом вида: 1+x5+x9 . Данному
+            образующему полному момжно сопоставить регистр сдвига с обратными связями,
+            приведенный на рисунке 1 (Стрелкой указано направление сдвига). Начальное состояние
+            регистра сдвига: «111111111».
+          </p>
+          <div class="image">
+            <img src="/img/labs/gnss-signals/Register059.png"/>
+          </div>  
+          <p>
+            Следует обратить внимание, что символы М-последовательности, формируемые с
+            помощью регистра сдвига, принимают два возможных значения: 0 и 1. Такое представление
+            называют логическим. Символы же М-последовательности, формируемые с помощью
+            листинга 1, принимают значения +1 и -1. Такое представление называют алгебраическим.
+            Эквивалентом операции суммирования по модулю 2 для логического представления является
+            операция умножения для алгебраического представления. (см. таблицу 1). Далее в основном
+            будет использоваться алгебраическое представление.
+          </p>
+        
+
         </div>
         <div class="tab-pane fade" id="practice">
-          <div>
-            <form class="form-horizontal lab__register">
+          <div class="lab-gnss-signals_options">
+            <form class="form-horizontal lab-gnss-signals_options__register">
               <fieldset>
                 <div class="col-lg-offset-1 col-lg-1">
                   <select class="form-control" id="reg-bit-0">
@@ -97,15 +114,40 @@
                 </div>                
               </fieldset>
             </form>  
-            <a class="btn default" onclick= "mCode512()">М-последовательность 512</a>
-            <div class="lab__chartwrapper">
-              <div class="lab__chart">
+            <div class="lab-gnss-signals_options_checkb">
+              <div class="lab-gnss-signals_options_add-noise">
+                  <label>
+                    <input id="lab_addNoise" type="checkbox"> Добавить шум
+                  </label>
+
+                  <div class="lab-gnss-signals_options_add-noise__RMS">
+                      <div id="slider-range1"></div> 
+                      <p>СКО</p>
+                  </div>
+              </div>
+            
+              <div class="lab-gnss-signals_options_add-delay">
+                  <label>
+                    <input id="lab_addDelay" type="checkbox"> Добавить задержку
+                  </label>
+
+                  <div class="lab-gnss-signals_options_add-delay__delay">
+                      <div id="slider-range2"></div> 
+                      <p>Количество символов</p>
+                  </div>
+              </div>              
+            </div>
+            <br>
+            <a id="lab_mCode512" class="btn default">Построить</a>
+        </div>
+            <div class="lab-gnss-signals__chartwrapper">
+              <div class="lab-gnss-signals__chart">
                 <canvas id="myChart1" width="400" height="400"></canvas>
               </div>
-              <div class="lab__chart">
+              <div class="lab-gnss-signals__chart">
                 <canvas id="myChart2" width="400" height="400"></canvas>
               </div>
-              <div class="lab__chart">
+              <div class="lab-gnss-signals__chart">
                 <canvas id="myChart3" width="400" height="400"></canvas>
               </div>
             </div>  
@@ -117,5 +159,7 @@
   </body>
 
 
-  <script src="/bundle.min.js"></script>
+  <script src="/js/bundle.min.js"></script>
+  <script src="/js/gnss-signals.js"></script>
+  <script src="/js/dsp.js"></script>
 </html>
