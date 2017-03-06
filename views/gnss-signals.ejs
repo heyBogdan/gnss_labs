@@ -12,11 +12,11 @@
   	<h4>Лабораторная работа №1</h4>
   	<p>"Исследование дальномерных кодов сигналов ГНСС"</p>
       <ul class="nav nav-tabs">
-        <li class=""><a href="#theory" data-toggle="tab" aria-expanded="false">Теория</a></li>
+        <li class="active"><a href="#theory" data-toggle="tab" aria-expanded="false">Теория</a></li>
         <li class=""><a href="#practice" data-toggle="tab" aria-expanded="false">Практика</a></li>
       </ul>
       <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade" id="theory">
+        <div class="tab-pane fade active in" id="theory">
           <p>
             <strong>
               Цель работы — изучение спектральных и автокорреляционных свойств
@@ -55,102 +55,213 @@
 
         </div>
         <div class="tab-pane fade" id="practice">
-          <div class="lab-gnss-signals_options">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="lab-gnss-signals_options">
+          <legend>Параметры эксперимента</legend>
             <form class="form-horizontal lab-gnss-signals_options__register">
               <fieldset>
-                <div class="col-lg-offset-1 col-lg-1">
-                  <select class="form-control" id="reg-bit-0">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
+                Регистр сдвига
+                <hr>
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №8 (старший бит)
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-8">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
                 </div>
-                <div class="col-lg-1">
-                  <select class="form-control" id="reg-bit-1">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №7
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-7">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
                 </div>
-                <div class="col-lg-1">
-                  <select class="form-control" id="reg-bit-2">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №6
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-6">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
                 </div>
-                <div class="col-lg-1">
-                  <select class="form-control" id="reg-bit-3">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №5
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-5">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
                 </div>
-                <div class="col-lg-1">
-                  <select class="form-control" id="reg-bit-4">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №4
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-4">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
                 </div>
-                <div class="col-lg-1">
-                  <select class="form-control" id="reg-bit-5">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №3
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-3">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
                 </div>
-                <div class="col-lg-1">
-                  <select class="form-control" id="reg-bit-6">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
-                </div>
-                <div class="col-lg-1">
-                  <select class="form-control" id="reg-bit-7">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
-                </div>
-                <div class="col-lg-1">
-                  <select class="form-control" id="reg-bit-8">
-                    <option>-1</option>
-                    <option>1</option>
-                  </select>
-                </div>                
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №2
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-2">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
+                </div>                                                       
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №1
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-1">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
+                </div>  
+                <div class="row">
+                  <div class="col-lg-7">
+                    Бит №0 (младший бит)
+                  </div>
+                  <div class="col-lg-5">
+                    <select class="form-control" id="reg-bit-0">
+                      <option>-1</option>
+                      <option>1</option>
+                    </select>
+                  </div>                    
+                </div>                                                       
               </fieldset>
-            </form>  
-            <div class="lab-gnss-signals_options_checkb">
-              <div class="lab-gnss-signals_options_add-noise">
-                  <label>
-                    <input id="lab_addNoise" type="checkbox"> Добавить шум
-                  </label>
-
-                  <div class="lab-gnss-signals_options_add-noise__RMS">
-                      <div id="slider-range1"></div> 
-                      <p>СКО</p>
+            </form>
+            <hr>
+            <ul class="nav nav-tabs lab-gnss-signals_options_frequency">
+              <li class="active"><a href="#DK" data-toggle="tab" aria-expanded="false">Без радиочастоты</a></li>
+              <li class=""><a href="#frequency" data-toggle="tab" aria-expanded="false">На радиочастоте</a></li>
+            </ul>
+            <div id="myTabContent2" class="tab-content">
+              <div class="tab-pane fade active in" id="DK">
+                <div class="lab-gnss-signals_options_checkb">
+                  <div class="lab-gnss-signals_options_periods row">
+                      <div class="col-lg-9">Кол-во периодов</div>
+                      <div class="col-lg-3">
+                        <select id="lab_periodNum">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="4">4</option>
+                          <option value="8">8</option>
+                           </select> 
+                      </div>
                   </div>
+                  <div class="lab-gnss-signals_options_add-noise row">
+                      <div class="col-lg-9">Добавить шум</div>
+                      <div class="col-lg-3">
+                        <input id="lab_addNoise" type="checkbox"> 
+                      </div>
+        
+                      <div class="lab-gnss-signals_options_add-noise__RMS col-lg-12">
+                          <div id="slider-range1"></div> 
+                          <p>СКО</p>
+                          <p>С/Ш = <span class="lab-gnss-signals_options_add-noise_RMS__SNR"></span></p>
+                      </div>
+                  </div>
+                
+                  <div class="lab-gnss-signals_options_add-delay row">
+                      <div class="col-lg-9">Добавить задержку</div>
+                      <div class="col-lg-3">
+                        <input id="lab_addDelay" type="checkbox"> 
+                      </div>
+                      <div class="lab-gnss-signals_options_add-delay__delay col-lg-12">
+                          <div id="slider-range2"></div> 
+                          <p>Количество символов</p>
+                      </div>
+                  </div>
+                  <a id="lab_mCode512" class="btn default">Построить</a>                
+                </div>
+                
+                              
               </div>
-            
-              <div class="lab-gnss-signals_options_add-delay">
-                  <label>
-                    <input id="lab_addDelay" type="checkbox"> Добавить задержку
-                  </label>
-
-                  <div class="lab-gnss-signals_options_add-delay__delay">
-                      <div id="slider-range2"></div> 
-                      <p>Количество символов</p>
+              <div class="tab-pane fade" id="frequency">
+                <div class="lab-gnss-signals_options_checkb">
+                  <div class="row">
+                    <div class="col-lg-12">Частота дискретизации, Мгц</div>
+                    <div class="col-lg-12 lab-gnss-signals_options__slider">
+                      <div id="slider-range3"></div> 
+                    </div>
                   </div>
-              </div>              
-            </div>
-            <br>
-            <a id="lab_mCode512" class="btn default">Построить</a>
+                  <div class="row">
+                    <div class="col-lg-12">Промежуточная частота, Мгц</div>
+                    <div class="col-lg-12 lab-gnss-signals_options__slider">
+                      <div id="slider-range4"></div> 
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">Длительно сигнала, мс</div>
+                    <div class="col-lg-12 lab-gnss-signals_options__slider">
+                      <div id="slider-range5"></div> 
+                    </div>
+                  </div>
+                  <br>                                    
+                  <a id="lab_signal" class="btn default">Построить</a>
+                </div>
+                  
+              </div>
+            </div> 
+
         </div>
-            <div class="lab-gnss-signals__chartwrapper">
-              <div class="lab-gnss-signals__chart">
-                <canvas id="myChart1" width="400" height="400"></canvas>
-              </div>
-              <div class="lab-gnss-signals__chart">
-                <canvas id="myChart2" width="400" height="400"></canvas>
-              </div>
-              <div class="lab-gnss-signals__chart">
-                <canvas id="myChart3" width="400" height="400"></canvas>
-              </div>
-            </div>  
+            </div>
+            <div class="col-lg-8">
+              <div class="lab-gnss-signals__chartwrapper">
+                <div class="lab-gnss-signals__chart">
+                  <canvas id="myChart1" width="400" height="400"></canvas>
+                </div>
+                <div class="lab-gnss-signals__chart">
+                  <canvas id="myChart2" width="400" height="400"></canvas>
+                </div>
+                <div class="lab-gnss-signals__chart">
+                  <canvas id="myChart3" width="400" height="400"></canvas>
+                </div>
+                <div class="lab-gnss-signals__chart">
+                  <canvas id="myChart4" width="400" height="400"></canvas>
+                </div>
+                <div class="lab-gnss-signals__chart">
+                  <canvas id="myChart5" width="400" height="400"></canvas>
+                </div>
+              </div> 
+            </div>
+          </div>
+          
+ 
           </div>
         </div>
       </div>
