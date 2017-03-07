@@ -194,6 +194,7 @@ function mCode512(){
 		xArgs256 = xArgs(256),
 		xArgs512 = xArgs(512),
 		xArgs1024 = xArgs(1024),
+		xArgs2048 = xArgs(2048),
 		xArgs4096 = xArgs(4096),
 		xArgs8192 = xArgs(8192);
 
