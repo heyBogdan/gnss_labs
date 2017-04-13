@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GNSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/bundle.min.css' />
+  </head>
+  <body>
+    <% include ../partials/header %>
+
+    <div class="container lab-nav-data">
+    <h4>Лабораторная работа №1</h4>
+    <p>"Исследование структуры навигационного сообщения"</p>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#theory" data-toggle="tab" aria-expanded="false">Теория</a></li>
+        <li class=""><a href="#practice" data-toggle="tab" aria-expanded="false">Практика</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="theory">
+          <p>
+            <strong>
+              Цель работы — 
+            </strong>
+          </p>
+          <p>
+            Навигационное сообщение передается в виде потока цифровой
+            информации, закодированной по коду Хемминга и преобразованной в
+            относительный код. Структурно поток ЦИ формируется в виде непрерывно
+            повторяющихся суперкадров. Суперкадр состоит из нескольких кадров, кадр
+            состоит из нескольких строк ЦИ.
+            Границы строк, кадров и суперкадров различных НКА синхронны с
+            погрешностью не более 2 мс
+          </p>
+          <p>
+            Суперкадр имеет длительность 2,5 мин и состоит из 5 кадров
+            длительностью 30 с. Каждый кадр состоит из 15 строк длительностью 2 с.
+            В пределах каждого суперкадра передается полный объем неоперативной
+            информации (альманах) для всех 24 НКА системы ГЛОНАСС.
+            Во вкладке "практика" приведена структура суперкадра с указанием номеров кадров в
+            суперкадре и номеров строк в кадрах. 
+          </p>
+          <div class="image">
+            
+          </div>  
+        </div>
+        <div class="tab-pane fade" id="practice">
+          <div class="row">
+              <div class="col-lg-4">
+                <div id="superFrameWrapper"></div>
+              </div>
+              <div class="col-lg-8">
+                
+              </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <% include ../partials/footer %>
+  </body>
+
+
+  <script src="/js/bundle.min.js"></script>
+  <script src="/js/nav-data.js"></script>
+  <script src="/js/dsp.js"></script>
+</html>

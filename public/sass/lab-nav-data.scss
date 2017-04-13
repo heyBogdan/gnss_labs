@@ -1,0 +1,41 @@
+.lab-nav-data{
+    text-align: center;
+    >h4{
+        margin-top: 50px;
+    }
+    >p{
+        font-size:1.7rem;
+        margin-bottom:  50px;
+        text-transform: uppercase;
+    }
+    ul{
+        list-style:none;
+        display:block;
+        text-align:center;
+        padding:0;
+    }
+    .frame{
+        font-size:16px;
+        line-height:7vh;
+        border:1px solid #d4d4d4;
+        &:hover{
+            background-color: #eee;
+        }    
+    }
+    .superframe-list{
+        margin-top:5vh;
+        cursor:pointer;
+    }
+    .nav-string{
+        height:30px;
+        font-size:12px;
+        line-height:30px;
+        border:1px solid #d4d4d4;
+        
+    }
+    .tab-pane{
+        font-size:1.5rem;
+        text-align: justify;
+        padding-top: 20px;
+    }
+}

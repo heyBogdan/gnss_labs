@@ -1,0 +1,77 @@
+svg a:hover {
+   text-decoration: none;
+}
+.pspd-scheme{
+    h4{
+        text-align: center;
+        margin-top: 5vh;
+    }
+    &_svg{
+        overflow-x:scroll;
+    }
+    .rectangle,.circle{
+        fill:transparent;
+        cursor:pointer;
+        stroke:#000;
+        stroke-width: 2;
+        transition:all 0.3s;
+        &:hover{
+            stroke:#0c84e4;
+            transition:all 0.5s;
+        }
+    }
+    .line{
+        stroke:#000;
+        stroke-width: 2;        
+    }
+    .rect-text{
+        cursor:pointer;
+        stroke-width: 1px;
+        font-weight: 100;
+        &:hover{
+            text-decoration:none;
+        }
+    }
+    .circle-text{
+        cursor:pointer;
+        stroke-width: 1px;
+        font-weight: 100;
+        font-size:30px;
+        &:hover{
+            text-decoration:none;
+        }
+    }
+    #rect-text-0{
+        transform:translate(25px,0);
+    }
+    #rect-text-1{
+        transform:translate(16px,0);
+    }
+    #rect-text-2{
+        transform:translate(10px,0);
+    }
+    #rect-text-3{
+        transform:translate(25px,0);
+    }
+    #rect-text-4{
+        transform:translate(1px,0);
+    }
+    #rect-text-5{
+        transform:translate(10px,0);
+    }
+    #rect-text-6{
+        transform:translate(26px,0);
+    }
+    #rect-text-7{
+        transform:translate(9px,0);
+    }
+    #rect-text-8{
+        transform:translate(1px,0);
+    }
+    #circle-text-0{
+        transform:translate(-8px,-2px);
+    }
+    #circle-text-1{
+        transform:translate(-2px,-2px);
+    }
+}

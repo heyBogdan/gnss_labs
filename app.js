@@ -26,7 +26,9 @@ app.use(app.router);
 
 app.get('/', routes.index);
 app.get('/users', users.list);
-app.get('/labs/gnss-signals', routes.gnssSignals);
+app.get('/glonass/gnss-signals', routes.gnssSignals);
+app.get('/glonass', routes.glonass);
+app.get('/glonass/nav-data', routes.navData);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
