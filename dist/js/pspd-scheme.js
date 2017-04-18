@@ -2,6 +2,9 @@ var RECTWIDTH = 10, RECTHEIGHT = 8;
 var LINELENGTH = 5;
 var CIRCLERADIUS = 3;
 var STROKEWIDTH = 0.5;
+var INFOBLOCKHEIGHT = 250, INFOBLOCKWIDTH = 150, INFOBLOCK_OFFSET = 5;
+var SYMBOLHEIGHT = 40, SYMBOLWIDTH = 20;
+
 
 var rectOptions = {
     width:RECTWIDTH + '%',
@@ -98,12 +101,62 @@ Line.makeHTML = function(lineses){
     });
 }
 
+function InfoBlock(infoBlockOptions){
+    this.symbolsNum = infoBlockOptions.symbolsNum;
+    this.duration = infoBlockOptions.duration;
+    this.x = infoBlockOptions.x;
+    this.y = infoBlockOptions.y;
+    this.width = INFOBLOCKWIDTH;
+    this.height = INFOBLOCKHEIGHT;
+    this.generatePath = function(){
+        var path = 'M -' + SYMBOLWIDTH*this.symbolsNum + ' ' + INFOBLOCKHEIGHT;
+        var symbols = [];
+        symbols[0] = 0;
+        for (var i = 1; i < this.symbolsNum; i++){
+            symbols.push(Math.round(Math.random()));
+            if(symbols[i-1] == 0 && symbols[i] == 1) path += ' v ' + SYMBOLHEIGHT;
+            if(symbols[i-1] == 1 && symbols[i] == 0) path += ' v -' + SYMBOLHEIGHT;
+            path += ' h ' + SYMBOLWIDTH;
+        }
+        return path;
+    }
+}
 
+InfoBlock.makeHTML = function(infoBlocks){
+    
+    infoBlocks.forEach(function(infoBlock, i){
+        var path = infoBlock.generatePath();
+
+        var infoBlockWrapper = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        infoBlockWrapper.setAttribute('x', infoBlock.x);
+        infoBlockWrapper.setAttribute('y', infoBlock.y);
+        infoBlockWrapper.setAttribute('width', infoBlock.width);
+        infoBlockWrapper.setAttribute('height', infoBlock.height);
+
+        var infoBlockSymbols = document.createElementNS('http://www.w3.org/2000/svg','path');
+        infoBlockSymbols.setAttribute('d',path);
+        infoBlockSymbols.setAttribute('style','fill:transparent;stroke:#000;stroke-width:2');
+        infoBlockSymbols.setAttribute('id','infoBlock' + i);
+        infoBlockSymbols.setAttribute('x','150');        
+
+        // var animateSymbols = document.createElementNS('http://www.w3.org/2000/svg','animate');
+        // animateSymbols.setAttribute('xlink:href',"#infoblock" + i);attributeName="cx"
+        // animateSymbols.setAttribute('attributeName',"cx")
+        // animateSymbols.setAttribute(from="50")
+        // animateSymbols.setAttribute()
+        // animateSymbols.setAttribute()
+        // animateSymbols.setAttribute()
+        // animateSymbols.setAttribute()
+
+        infoBlockWrapper.appendChild(infoBlockSymbols);
+        scheme.appendChild(infoBlockWrapper);
+    })
+}
 
 var navDataOptions = {
     x:'5%',
     y:'60%',
-    content: 'НИ',
+    content: 'ЦИ',
     link:'/glonass/nav-data'
 }
 var coderOptions = {
@@ -244,8 +297,13 @@ var carrierOptions = {
     content:'Несущая'    
 }
 
+var timeLabelBlockOptions = {
+    x: timeMOptions.x,
+    y: (parseInt(timeMOptions.y) + RECTWIDTH + INFOBLOCK_OFFSET) + '%',
+    symbolsNum : 30
+}
 
-var rectangles = [], circles = [], lines = []; 
+var rectangles = [], circles = [], lines = [], infoBlocks = []; 
 
 rectangles.push(new Rectangle(navDataOptions), new Rectangle(coderOptions),
 new Rectangle(ofmOptions), new Rectangle(timeMOptions), new Rectangle(modulatorOptions),
@@ -259,10 +317,16 @@ new Line(line7Options), new Line(line8Options), new Line(line9Options),
 new Line(line10Options), new Line(line11Options), new Line(line12Options),
 new Line(line13Options))
 
+infoBlocks.push(new InfoBlock(timeLabelBlockOptions));
+
+
 Rectangle.makeHTML(rectangles);
 Circle.makeHTML(circles);
 Line.makeHTML(lines);
+InfoBlock.makeHTML(infoBlocks);
 
+
+//timers
 isDataTime = true;
 (function changeKey(){
     if(isDataTime){
