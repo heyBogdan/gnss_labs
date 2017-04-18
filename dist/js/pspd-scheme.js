@@ -20,6 +20,7 @@ function Rectangle(rectOptions){
     this.y = rectOptions.y + '%';
     this.content = rectOptions.content;
     this.link = rectOptions.link;
+    this.description = rectOptions.description;
     if(rectOptions.width) this.width = rectOptions.width + '%';
     if(rectOptions.height) this.height = rectOptions.height + '%';
 }
@@ -43,6 +44,23 @@ Rectangle.makeHTML = function(rects){
         wrapper.setAttribute('href', rect.link);
         wrapper.appendChild(rectElem);
         wrapper.appendChild(textElem);
+        if(rect.description){
+            var descriptionElement = document.createElementNS('http://www.w3.org/2000/svg','foreignObject');
+            descriptionElement.setAttribute('x', rect.x);
+            descriptionElement.setAttribute('y', (parseInt(rect.y) + RECTWIDTH) + '%');
+            var descriptionDiv = document.createElement('div');
+            descriptionDiv.className = 'description-element';
+            descriptionDiv.innerHTML = rect.description;
+            descriptionElement.appendChild(descriptionDiv);
+            wrapper.appendChild(descriptionElement);
+
+            wrapper.onmouseover = function(){
+                descriptionDiv.classList.toggle('description-element--in')
+            }
+            wrapper.onmouseout = function(){
+                descriptionDiv.classList.toggle('description-element--in')
+            }                   
+        }
         scheme.appendChild(wrapper);
     });
 }
@@ -174,6 +192,7 @@ var navDataOptions = {
     x:5,
     y:60,
     content: 'ЦИ',
+    description: '123123123 123 123 123 123 ',
     link:'/glonass/nav-data'
 }
 var coderOptions = {
@@ -266,7 +285,7 @@ var circle2Options = {
 }
 //circle2 + modulator
 var line10Options = {
-    x1: circle2Options.x + CIRCLERADIUS,
+    x1: circle2Options.x + CIRCLERADIUS - STROKEWIDTH,
     y1: line8Options.y2,
     x2: circle2Options.x + CIRCLERADIUS + LINELENGTH,
     y2: line8Options.y2
@@ -303,7 +322,7 @@ var meandrOptions = {
     content:'Меандр'    
 }
 var pspOptions = {
-    x:line12Options.x2 - RECTWIDTH/2 + STROKEWIDTH,
+    x:line12Options.x2 - RECTWIDTH/2 ,
     y:line12Options.y2,
     content:'ПСП',
     link:'/glonass/gnss-signals/'    
@@ -330,6 +349,8 @@ var digitalInfoOptions = {
     freq:100
 }
 
+
+
 var rectangles = [], circles = [], lines = [], infoBlocks = []; 
 
 rectangles.push(new Rectangle(navDataOptions), new Rectangle(coderOptions),
@@ -353,6 +374,17 @@ Line.makeHTML(lines);
 InfoBlock.makeHTML(infoBlocks);
 
 
+var string = 1, frame = 1, superFrame = 1; 
+function validateData(){
+    if(!(string % 16)){
+        frame++;
+        string = 1;
+        if(!(frame % 6)){
+            superFrame++;
+            frame = 1;
+        }
+    }
+}
 //timers
 isDataTime = true;
 (function changeKey(){
@@ -362,6 +394,11 @@ isDataTime = true;
         lineId7.setAttribute('y1', line6Options.y2 + '%');
         infoBlock1.style.display = 'block';
         infoBlock0.style.display = 'none';
+        statBlockString.innerHTML = string;
+        statBlockFrame.innerHTML = frame;
+        statBlockSuperFrame.innerHTML = superFrame;        
+        string += 1;
+        validateData();
         return setTimeout(changeKey, delay);    
     }else{
         delay = 300;
