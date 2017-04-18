@@ -2,8 +2,8 @@ var RECTWIDTH = 10, RECTHEIGHT = 8;
 var LINELENGTH = 5;
 var CIRCLERADIUS = 3;
 var STROKEWIDTH = 0.5;
-var INFOBLOCKHEIGHT = 250, INFOBLOCKWIDTH = 150, INFOBLOCK_OFFSET = 5;
-var SYMBOLHEIGHT = 40, SYMBOLWIDTH = 20;
+var INFOBLOCKHEIGHT = 15, INFOBLOCKWIDTH = 8, INFOBLOCK_OFFSET = 5;
+var SYMBOLHEIGHT = 40, SYMBOLWIDTH = 10;
 
 
 var rectOptions = {
@@ -16,12 +16,12 @@ var circleOptions = {
 
 Rectangle.prototype = rectOptions;
 function Rectangle(rectOptions){
-    this.x = rectOptions.x;
-    this.y = rectOptions.y;
+    this.x = rectOptions.x + '%';
+    this.y = rectOptions.y + '%';
     this.content = rectOptions.content;
     this.link = rectOptions.link;
-    if(rectOptions.width) this.width = rectOptions.width;
-    if(rectOptions.height) this.height = rectOptions.height;
+    if(rectOptions.width) this.width = rectOptions.width + '%';
+    if(rectOptions.height) this.height = rectOptions.height + '%';
 }
 Rectangle.makeHTML = function(rects){
     rects.forEach(function(rect,i){
@@ -54,8 +54,8 @@ Rectangle.makeHTML = function(rects){
 
 Circle.prototype = circleOptions;
 function Circle(rectOptions){
-    this.cx = rectOptions.x;
-    this.cy = rectOptions.y;
+    this.cx = rectOptions.x + '%';
+    this.cy = rectOptions.y + '%';
     this.content = rectOptions.content;
 }
 Circle.makeHTML = function(circles){
@@ -84,10 +84,10 @@ Circle.makeHTML = function(circles){
 
 
 function Line(lineOptions){
-    this.x1 = lineOptions.x1;
-    this.y1 = lineOptions.y1;
-    this.x2 = lineOptions.x2;
-    this.y2 = lineOptions.y2;
+    this.x1 = lineOptions.x1 + '%';
+    this.y1 = lineOptions.y1 + '%';
+    this.x2 = lineOptions.x2 + '%';
+    this.y2 = lineOptions.y2 + '%';
 }
 Line.makeHTML = function(lineses){
     lines.forEach(function(line,i){
@@ -104,12 +104,13 @@ Line.makeHTML = function(lineses){
 function InfoBlock(infoBlockOptions){
     this.symbolsNum = infoBlockOptions.symbolsNum;
     this.duration = infoBlockOptions.duration;
-    this.x = infoBlockOptions.x;
-    this.y = infoBlockOptions.y;
-    this.width = INFOBLOCKWIDTH;
-    this.height = INFOBLOCKHEIGHT;
+    this.x = infoBlockOptions.x + '%';
+    this.y = infoBlockOptions.y + '%';
+    this.width = INFOBLOCKWIDTH + '%';
+    this.height = INFOBLOCKHEIGHT + '%';
+    this.freq = infoBlockOptions.freq;
     this.generatePath = function(){
-        var path = 'M -' + SYMBOLWIDTH*this.symbolsNum + ' ' + INFOBLOCKHEIGHT;
+        var path = 'M 0 40';
         var symbols = [];
         symbols[0] = 0;
         for (var i = 1; i < this.symbolsNum; i++){
@@ -133,20 +134,36 @@ InfoBlock.makeHTML = function(infoBlocks){
         infoBlockWrapper.setAttribute('width', infoBlock.width);
         infoBlockWrapper.setAttribute('height', infoBlock.height);
 
+        var textElem = document.createElementNS('http://www.w3.org/2000/svg','text');
+        var textNode = document.createTextNode('Длительность:' + infoBlock.duration + 'с');
+        textElem.setAttribute('x','0');
+        textElem.setAttribute('y','10');
+        textElem.setAttribute ('style','font-size:10px');
+        textElem.appendChild(textNode);
+        var textElem2 = document.createElementNS('http://www.w3.org/2000/svg','text');
+        var textNode2 = document.createTextNode("Частота: " + infoBlock.freq + "Гц");
+        textElem2.setAttribute('x','0');
+        textElem2.setAttribute('y','25');
+        textElem2.setAttribute ('style','font-size:10px');
+        textElem2.appendChild(textNode2);         
+        infoBlockWrapper.appendChild(textElem);
+        infoBlockWrapper.appendChild(textElem2);
+
+
         var infoBlockSymbols = document.createElementNS('http://www.w3.org/2000/svg','path');
         infoBlockSymbols.setAttribute('d',path);
         infoBlockSymbols.setAttribute('style','fill:transparent;stroke:#000;stroke-width:2');
         infoBlockSymbols.setAttribute('id','infoBlock' + i);
-        infoBlockSymbols.setAttribute('x','150');        
+        
 
-        // var animateSymbols = document.createElementNS('http://www.w3.org/2000/svg','animate');
-        // animateSymbols.setAttribute('xlink:href',"#infoblock" + i);attributeName="cx"
-        // animateSymbols.setAttribute('attributeName',"cx")
-        // animateSymbols.setAttribute(from="50")
-        // animateSymbols.setAttribute()
-        // animateSymbols.setAttribute()
-        // animateSymbols.setAttribute()
-        // animateSymbols.setAttribute()
+        var animateSymbols = document.createElementNS('http://www.w3.org/2000/svg','animateTransform');
+        animateSymbols.setAttribute('attributeName','transform');
+        animateSymbols.setAttribute('type','translate');
+        animateSymbols.setAttribute('from','-' + SYMBOLWIDTH*infoBlock.symbolsNum + ' 0');
+        animateSymbols.setAttribute('to','0 0');
+        animateSymbols.setAttribute('dur', infoBlock.duration + 's');
+        animateSymbols.setAttribute('repeatCount','indefinite');
+        infoBlockSymbols.appendChild(animateSymbols); 
 
         infoBlockWrapper.appendChild(infoBlockSymbols);
         scheme.appendChild(infoBlockWrapper);
@@ -154,153 +171,163 @@ InfoBlock.makeHTML = function(infoBlocks){
 }
 
 var navDataOptions = {
-    x:'5%',
-    y:'60%',
+    x:5,
+    y:60,
     content: 'ЦИ',
     link:'/glonass/nav-data'
 }
 var coderOptions = {
-    x: (parseInt(navDataOptions.x) + RECTWIDTH + LINELENGTH) + '%',
+    x: navDataOptions.x + RECTWIDTH + LINELENGTH,
     y: navDataOptions.y,
     content:'Кодер'
 }
 var ofmOptions = {
-    x: (parseInt(coderOptions.x) + RECTWIDTH + LINELENGTH) + '%',
+    x: coderOptions.x + RECTWIDTH + LINELENGTH,
     y: navDataOptions.y,
     content:'Отн. код'
 }
 var timeMOptions = {
     x:ofmOptions.x,
-    y:'10%',
+    y:10,
     content:'МВ'
 }
 var circle1Options = {
-    x: (parseInt(ofmOptions.x) + RECTWIDTH + LINELENGTH + CIRCLERADIUS) + '%',
-    y: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%',
+    x: ofmOptions.x + RECTWIDTH + LINELENGTH + CIRCLERADIUS,
+    y: navDataOptions.y + RECTHEIGHT/2,
     content: '+'
 }
 //navdata + coder
 var line1Options = {
-    x1: (parseInt(navDataOptions.x) + RECTWIDTH) + '%',
-    y1: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%',
-    x2: (parseInt(navDataOptions.x) + RECTWIDTH + LINELENGTH) + '%',
-    y2: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%'
+    x1: navDataOptions.x + RECTWIDTH,
+    y1: navDataOptions.y + RECTHEIGHT/2,
+    x2: navDataOptions.x + RECTWIDTH + LINELENGTH,
+    y2: navDataOptions.y + RECTHEIGHT/2
 }
 //coder + ofm
 var line2Options = {
-    x1: (parseInt(coderOptions.x) + RECTWIDTH) + '%',
-    y1: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%',
-    x2: (parseInt(coderOptions.x) + RECTWIDTH + LINELENGTH) + '%',
-    y2: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%'
+    x1: coderOptions.x + RECTWIDTH,
+    y1: navDataOptions.y + RECTHEIGHT/2,
+    x2: coderOptions.x + RECTWIDTH + LINELENGTH,
+    y2: navDataOptions.y + RECTHEIGHT/2
 }
 //ofm + circle1
 var line3Options = {
-    x1: (parseInt(ofmOptions.x) + RECTWIDTH) + '%',
-    y1: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%',
-    x2: (parseInt(ofmOptions.x) + RECTWIDTH + LINELENGTH + STROKEWIDTH) + '%',
-    y2: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%'
+    x1: ofmOptions.x + RECTWIDTH,
+    y1: navDataOptions.y + RECTHEIGHT/2,
+    x2: ofmOptions.x + RECTWIDTH + LINELENGTH + STROKEWIDTH,
+    y2: navDataOptions.y + RECTHEIGHT/2
 }
 //circle1 t0 vertical
 var line4Options = {
-    x1: (parseInt(circle1Options.x) + CIRCLERADIUS - STROKEWIDTH) + '%',
-    y1: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%',
-    x2: (parseInt(circle1Options.x) + CIRCLERADIUS + LINELENGTH) + '%',
-    y2: (parseInt(navDataOptions.y) + RECTHEIGHT/2) + '%'
+    x1: circle1Options.x + CIRCLERADIUS - STROKEWIDTH,
+    y1: navDataOptions.y + RECTHEIGHT/2,
+    x2: circle1Options.x + CIRCLERADIUS + LINELENGTH,
+    y2: navDataOptions.y + RECTHEIGHT/2
 }
 //timelabel to vertical
 var line5Options = {
-    x1: (parseInt(timeMOptions.x) + RECTWIDTH) + '%',
-    y1: (parseInt(timeMOptions.y) + RECTHEIGHT/2) + '%',
-    x2: (parseInt(timeMOptions.x) + RECTWIDTH + 2*LINELENGTH + 2*CIRCLERADIUS ) + '%',
-    y2: (parseInt(timeMOptions.y) + RECTHEIGHT/2) + '%'
+    x1: timeMOptions.x + RECTWIDTH,
+    y1: timeMOptions.y + RECTHEIGHT/2,
+    x2: timeMOptions.x + RECTWIDTH + 2*LINELENGTH + 2*CIRCLERADIUS,
+    y2: timeMOptions.y + RECTHEIGHT/2
 }
 //vertical bottom to key
 var line6Options = {
     x1: line4Options.x2,
     y1: line4Options.y2,
     x2: line4Options.x2,
-    y2: (parseInt(line4Options.y2) - 4*LINELENGTH ) + '%'
+    y2: line4Options.y2 - 4*LINELENGTH
 }
 //vertical top to key
 var line7Options = {
     x1: line5Options.x2,
     y1: line5Options.y2,
     x2: line5Options.x2,
-    y2: (parseInt(line5Options.y2) + 4*LINELENGTH ) + '%'
+    y2: line5Options.y2 + 4*LINELENGTH
 }
 //key
 var line8Options = {
     x1: line6Options.x2,
     y1: line6Options.y2,
-    x2: (parseInt(line6Options.x2) + LINELENGTH) + '%',
-    y2: (parseInt(line6Options.y2) - LINELENGTH ) + '%'
+    x2: line6Options.x2 + LINELENGTH,
+    y2: line6Options.y2 - LINELENGTH
 }
 //key + circle2
 var line9Options = {
     x1: line8Options.x2,
     y1: line8Options.y2,
-    x2: (parseInt(line8Options.x2) + LINELENGTH) + '%',
+    x2: line8Options.x2 + LINELENGTH,
     y2: line8Options.y2
 }
 var circle2Options = {
-    x: (parseInt(line9Options.x2) + CIRCLERADIUS - STROKEWIDTH) + '%',
+    x: line9Options.x2 + CIRCLERADIUS - STROKEWIDTH,
     y: line9Options.y2,
     content: '+'
 }
 //circle2 + modulator
 var line10Options = {
-    x1: (parseInt(circle2Options.x) + CIRCLERADIUS) + '%',
+    x1: circle2Options.x + CIRCLERADIUS,
     y1: line8Options.y2,
-    x2: (parseInt(circle2Options.x) + CIRCLERADIUS + LINELENGTH) + '%',
+    x2: circle2Options.x + CIRCLERADIUS + LINELENGTH,
     y2: line8Options.y2
 }
 var modulatorOptions = {
     x: line10Options.x2,
-    y: (parseInt(line10Options.y2) - RECTHEIGHT/2) + '%',
+    y: line10Options.y2 - RECTHEIGHT/2,
     content:'Модулятор'
 }
 //circle1 + meandr
 var line11Options = {
     x1: circle1Options.x,
-    y1: (parseInt(circle1Options.y) + CIRCLERADIUS + 3*STROKEWIDTH  ) + '%',
+    y1: circle1Options.y + CIRCLERADIUS + 3*STROKEWIDTH,
     x2: circle1Options.x,
-    y2: (parseInt(circle1Options.y) + CIRCLERADIUS + 2*LINELENGTH ) + '%',
+    y2: circle1Options.y + CIRCLERADIUS + 2*LINELENGTH,
 }
 //circle2 + psp
 var line12Options = {
     x1: circle2Options.x,
-    y1: (parseInt(circle2Options.y) + CIRCLERADIUS + 3*STROKEWIDTH  ) + '%',
+    y1: circle2Options.y + CIRCLERADIUS + 3*STROKEWIDTH,
     x2: circle2Options.x,
-    y2: (parseInt(circle2Options.y) + CIRCLERADIUS + 2*LINELENGTH ) + '%',
+    y2: circle2Options.y + CIRCLERADIUS + 2*LINELENGTH
 }
 //modulator + carrier
 var line13Options = {
-    x1: (parseInt(modulatorOptions.x) + RECTWIDTH/2) + '%',
-    y1: (parseInt(modulatorOptions.y) + RECTHEIGHT) + '%',
-    x2: (parseInt(modulatorOptions.x) + RECTWIDTH/2) + '%',
-    y2: (parseInt(modulatorOptions.y) + RECTHEIGHT + 2*LINELENGTH - 2*STROKEWIDTH ) + '%',
+    x1: modulatorOptions.x + RECTWIDTH/2,
+    y1: modulatorOptions.y + RECTHEIGHT,
+    x2: modulatorOptions.x + RECTWIDTH/2,
+    y2: modulatorOptions.y + RECTHEIGHT + 2*LINELENGTH - 2*STROKEWIDTH,
 }
 var meandrOptions = {
-    x:(parseInt(line11Options.x2) - RECTWIDTH/2) + '%',
+    x:line11Options.x2 - RECTWIDTH/2,
     y:line11Options.y2,
     content:'Меандр'    
 }
 var pspOptions = {
-    x:(parseInt(line12Options.x2) - RECTWIDTH/2 + STROKEWIDTH ) + '%',
+    x:line12Options.x2 - RECTWIDTH/2 + STROKEWIDTH,
     y:line12Options.y2,
     content:'ПСП',
     link:'/glonass/gnss-signals/'    
 }
 var carrierOptions = {
-    x:(parseInt(line13Options.x2) - RECTWIDTH/2) + '%',
+    x:line13Options.x2 - RECTWIDTH/2,
     y:line13Options.y2,
     content:'Несущая'    
 }
 
 var timeLabelBlockOptions = {
-    x: timeMOptions.x,
-    y: (parseInt(timeMOptions.y) + RECTWIDTH + INFOBLOCK_OFFSET) + '%',
-    symbolsNum : 30
+    x: line7Options.x1 - RECTWIDTH,
+    y: timeMOptions.y + 2*INFOBLOCK_OFFSET,
+    symbolsNum : 30,
+    duration:0.3,
+    freq:100
+}
+
+var digitalInfoOptions = {
+    x: line7Options.x1 - RECTWIDTH,
+    y: ofmOptions.y - 3.5*INFOBLOCK_OFFSET,
+    symbolsNum : 170,
+    duration:1.7,
+    freq:100
 }
 
 var rectangles = [], circles = [], lines = [], infoBlocks = []; 
@@ -317,7 +344,7 @@ new Line(line7Options), new Line(line8Options), new Line(line9Options),
 new Line(line10Options), new Line(line11Options), new Line(line12Options),
 new Line(line13Options))
 
-infoBlocks.push(new InfoBlock(timeLabelBlockOptions));
+infoBlocks.push(new InfoBlock(timeLabelBlockOptions), new InfoBlock(digitalInfoOptions));
 
 
 Rectangle.makeHTML(rectangles);
@@ -332,12 +359,16 @@ isDataTime = true;
     if(isDataTime){
         var delay = 1700;
         isDataTime = !isDataTime;
-        lineId7.setAttribute('y1', line6Options.y2);
+        lineId7.setAttribute('y1', line6Options.y2 + '%');
+        infoBlock1.style.display = 'block';
+        infoBlock0.style.display = 'none';
         return setTimeout(changeKey, delay);    
     }else{
         delay = 300;
         isDataTime = !isDataTime;
         lineId7.setAttribute('y1', (parseInt(line6Options.y2) - 2*LINELENGTH) + '%' );
+        infoBlock1.style.display = 'none';
+        infoBlock0.style.display = 'block';
         return setTimeout(changeKey, delay);        
     }
 })();
