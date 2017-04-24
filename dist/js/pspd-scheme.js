@@ -46,8 +46,8 @@ Rectangle.makeHTML = function(rects){
         wrapper.appendChild(textElem);
         if(rect.description){
             var descriptionElement = document.createElementNS('http://www.w3.org/2000/svg','foreignObject');
-            descriptionElement.setAttribute('x', rect.x);
-            descriptionElement.setAttribute('y', (parseInt(rect.y) + RECTWIDTH) + '%');
+            descriptionElement.setAttribute('x', (parseInt(rect.x)) + '%');
+            descriptionElement.setAttribute('y', (parseInt(rect.y) + RECTHEIGHT*1.2) + '%');
             var descriptionDiv = document.createElement('div');
             descriptionDiv.className = 'description-element';
             descriptionDiv.innerHTML = rect.description;
@@ -127,7 +127,8 @@ function InfoBlock(infoBlockOptions){
     this.width = INFOBLOCKWIDTH + '%';
     this.height = INFOBLOCKHEIGHT + '%';
     this.freq = infoBlockOptions.freq;
-    this.generatePath = function(){
+    this.type = infoBlockOptions.type;
+    this.generateRandPath = function(){
         var path = 'M 0 40';
         var symbols = [];
         symbols[0] = 0;
@@ -139,12 +140,25 @@ function InfoBlock(infoBlockOptions){
         }
         return path;
     }
+    this.generateMeandrPath = function(){
+        var path = 'M 0 40';
+        for (var i = 1; i < this.symbolsNum; i++){
+            path += ((i%2) == 0) ? ' v -' : ' v ' ;
+            path += SYMBOLHEIGHT;
+            path += ' h ' + SYMBOLWIDTH;
+        }
+        return path;
+    }
 }
 
 InfoBlock.makeHTML = function(infoBlocks){
     
     infoBlocks.forEach(function(infoBlock, i){
-        var path = infoBlock.generatePath();
+        if(infoBlock.type == "data"){
+            var path = infoBlock.generateRandPath();
+        } else if (infoBlock.type == "meandr"){
+            var path = infoBlock.generateMeandrPath();
+        }        
 
         var infoBlockWrapper = document.createElementNS('http://www.w3.org/2000/svg','svg');
         infoBlockWrapper.setAttribute('x', infoBlock.x);
@@ -192,7 +206,9 @@ var navDataOptions = {
     x:5,
     y:60,
     content: 'ЦИ',
-    description: '123123123 123 123 123 123 ',
+    description: 'Блок формирования ЦИ с символьной частотой 50 Гц. '+
+     'Каждая строка содержит 85 двоичных символов ЦИ,'+
+    'Нумерация позиций символов в строке осуществляется справа налево.',
     link:'/glonass/nav-data'
 }
 var coderOptions = {
@@ -338,7 +354,8 @@ var timeLabelBlockOptions = {
     y: timeMOptions.y + 2*INFOBLOCK_OFFSET,
     symbolsNum : 30,
     duration:0.3,
-    freq:100
+    freq:100,
+    type:'data'
 }
 
 var digitalInfoOptions = {
@@ -346,7 +363,26 @@ var digitalInfoOptions = {
     y: ofmOptions.y - 3.5*INFOBLOCK_OFFSET,
     symbolsNum : 170,
     duration:1.7,
-    freq:100
+    freq:100,
+    type:'data'
+}
+
+var digitalInfoRawOptions = {
+    x: line1Options.x1,
+    y: navDataOptions.y - 3.5*INFOBLOCK_OFFSET,
+    symbolsNum : 85,
+    duration:1.7,
+    freq:50,
+    type:'data'
+}
+
+var binaryMeandrOptions = {
+    x: meandrOptions.x + 1.2*RECTWIDTH ,
+    y: meandrOptions.y - 0.75*RECTHEIGHT,
+    symbolsNum : 340,
+    duration:1.7,
+    freq:100,
+    type:'meandr'
 }
 
 
@@ -365,7 +401,8 @@ new Line(line7Options), new Line(line8Options), new Line(line9Options),
 new Line(line10Options), new Line(line11Options), new Line(line12Options),
 new Line(line13Options))
 
-infoBlocks.push(new InfoBlock(timeLabelBlockOptions), new InfoBlock(digitalInfoOptions));
+infoBlocks.push(new InfoBlock(timeLabelBlockOptions), new InfoBlock(digitalInfoOptions),
+new InfoBlock(digitalInfoRawOptions), new InfoBlock(binaryMeandrOptions));
 
 
 Rectangle.makeHTML(rectangles);
@@ -379,12 +416,26 @@ function validateData(){
     if(!(string % 16)){
         frame++;
         string = 1;
+        clearInterval(time);
+        time = setInterval(function(){
+            seconds += 1;
+            statBlockTime.innerHTML = seconds;
+        },1000);
         if(!(frame % 6)){
             superFrame++;
             frame = 1;
         }
     }
 }
+
+seconds = 0;
+
+var time = setInterval(function(){
+    seconds += 1;
+    statBlockTime.innerHTML = seconds;
+},1000)
+
+
 //timers
 isDataTime = true;
 (function changeKey(){
@@ -394,6 +445,8 @@ isDataTime = true;
         lineId7.setAttribute('y1', line6Options.y2 + '%');
         infoBlock1.style.display = 'block';
         infoBlock0.style.display = 'none';
+        infoBlock2.style.display = 'block';
+        infoBlock3.style.display = 'block';
         statBlockString.innerHTML = string;
         statBlockFrame.innerHTML = frame;
         statBlockSuperFrame.innerHTML = superFrame;        
@@ -406,6 +459,8 @@ isDataTime = true;
         lineId7.setAttribute('y1', (parseInt(line6Options.y2) - 2*LINELENGTH) + '%' );
         infoBlock1.style.display = 'none';
         infoBlock0.style.display = 'block';
+        infoBlock2.style.display = 'none';
+        infoBlock3.style.display = 'none';
         return setTimeout(changeKey, delay);        
     }
 })();
