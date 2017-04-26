@@ -198,7 +198,7 @@ function normalizeByMax(arr){
 
 function translateToDB(arr){
 	for(var i = 0; i < arr.length; i++){
-		arr[i] = 10 * Math.log10(arr[i]);
+		arr[i] = 20 * Math.log10(arr[i]);
 	}
 }
 
