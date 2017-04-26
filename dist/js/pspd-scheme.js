@@ -46,7 +46,7 @@ Rectangle.makeHTML = function(rects){
         wrapper.appendChild(textElem);
         if(rect.description){
             var descriptionElement = document.createElementNS('http://www.w3.org/2000/svg','foreignObject');
-            descriptionElement.setAttribute('x', (parseInt(rect.x)) + '%');
+            descriptionElement.setAttribute('x', (0.8*parseInt(rect.x)) + '%');
             descriptionElement.setAttribute('y', (parseInt(rect.y) + RECTHEIGHT*1.2) + '%');
             var descriptionDiv = document.createElement('div');
             descriptionDiv.className = 'description-element';
@@ -207,24 +207,27 @@ var navDataOptions = {
     y:60,
     content: 'ЦИ',
     description: 'Блок формирования ЦИ с символьной частотой 50 Гц. '+
-     'Каждая строка содержит 85 двоичных символов ЦИ,'+
+     'Каждая строка содержит 85 двоичных символов ЦИ. '+
     'Нумерация позиций символов в строке осуществляется справа налево.',
     link:'/glonass/nav-data'
 }
 var coderOptions = {
     x: navDataOptions.x + RECTWIDTH + LINELENGTH,
     y: navDataOptions.y,
-    content:'Кодер'
+    content:'Кодер',
+    description:'В каждой строке ЦИ передаются 8 проверочных символов кода Хемминга (КХ), позволяющие производить проверку достоверности символов ЦИ в строк'
 }
 var ofmOptions = {
     x: coderOptions.x + RECTWIDTH + LINELENGTH,
     y: navDataOptions.y,
-    content:'Отн. код'
+    content:'Отн. код',
+    description:'Блок преобразования ЦЙ в относительны код, позволяющий учитывать при декодировании не абсолютные значения фазы сигнала, а ее относительные сдвиги'
 }
 var timeMOptions = {
     x:ofmOptions.x,
     y:10,
-    content:'МВ'
+    content:'МВ',
+    description:'Метка времени - укороченная ПС последовательность, состоящая из 30-ти символов длительностью 10 мс'
 }
 var circle1Options = {
     x: ofmOptions.x + RECTWIDTH + LINELENGTH + CIRCLERADIUS,
@@ -309,7 +312,8 @@ var line10Options = {
 var modulatorOptions = {
     x: line10Options.x2,
     y: line10Options.y2 - RECTHEIGHT/2,
-    content:'Модулятор'
+    content:'Модулятор',
+    description:'Блок изменяющий параметры несущего сигнала в соответствии с изменениями передаваемого сигнала'
 }
 //circle1 + meandr
 var line11Options = {
@@ -335,18 +339,21 @@ var line13Options = {
 var meandrOptions = {
     x:line11Options.x2 - RECTWIDTH/2,
     y:line11Options.y2,
-    content:'Меандр'    
+    content:'Меандр',
+    description:'Блок формирования вспомогательного меандрового колебания'    
 }
 var pspOptions = {
     x:line12Options.x2 - RECTWIDTH/2 ,
     y:line12Options.y2,
     content:'ПСП',
+    description:'Блок формирования псевдослучайного дальномерного кода, передаваемого со скоростью 511 кбит/с',
     link:'/glonass/gnss-signals/'    
 }
 var carrierOptions = {
     x:line13Options.x2 - RECTWIDTH/2,
     y:line13Options.y2,
-    content:'Несущая'    
+    content:'Несущая',
+    description:'Блок формирования номинальных значений несущих частот в частотных поддиапазонах L1 и L2'    
 }
 
 var timeLabelBlockOptions = {
