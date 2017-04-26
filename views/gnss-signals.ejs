@@ -10,7 +10,7 @@
 
   	<div class="container lab-gnss-signals">
   	<h4>Лабораторная работа №1</h4>
-  	<p>"Исследование дальномерных кодов сигналов ГНСС"</p>
+  	<p>"Исследование дальномерного кода сигнала ГЛОНАСС"</p>
       <ul class="nav nav-tabs">
         <li class="active"><a href="#theory" data-toggle="tab" aria-expanded="false">Теория</a></li>
         <li class=""><a href="#practice" data-toggle="tab" aria-expanded="false">Практика</a></li>
@@ -48,7 +48,7 @@
             называют логическим. Символы же М-последовательности, формируемые с помощью
             листинга 1, принимают значения +1 и -1. Такое представление называют алгебраическим.
             Эквивалентом операции суммирования по модулю 2 для логического представления является
-            операция умножения для алгебраического представления. (см. таблицу 1). Далее в основном
+            операция умножения для алгебраического представления. Далее в основном
             будет использоваться алгебраическое представление.
           </p>
         
@@ -166,8 +166,8 @@
             </form>
             <hr>
             <ul class="nav nav-tabs lab-gnss-signals_options_frequency">
-              <li class="active"><a href="#DK" data-toggle="tab" aria-expanded="false">Без радиочастоты</a></li>
-              <li class=""><a href="#frequency" data-toggle="tab" aria-expanded="false">На радиочастоте</a></li>
+              <li class="active"><a href="#DK" data-toggle="tab" aria-expanded="false" onclick="removeCharts()">Без радиочастоты</a></li>
+              <li class=""><a href="#frequency" data-toggle="tab" aria-expanded="false" onclick="removeCharts()">На радиочастоте</a></li>
             </ul>
             <div id="myTabContent2" class="tab-content">
               <div class="tab-pane fade active in" id="DK">
@@ -191,7 +191,7 @@
         
                       <div class="lab-gnss-signals_options_add-noise__RMS col-lg-12">
                           <div id="slider-range1"></div> 
-                          <p>СКО</p>
+                          <p>СКО, В</p>
                           <p>С/Ш = <span class="lab-gnss-signals_options_add-noise_RMS__SNR"></span></p>
                       </div>
                   </div>
@@ -226,7 +226,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-12">Длительно сигнала, мс</div>
+                    <div class="col-lg-12">Длительность сигнала, мс</div>
                     <div class="col-lg-12 lab-gnss-signals_options__slider">
                       <div id="slider-range5"></div> 
                     </div>

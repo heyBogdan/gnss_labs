@@ -11,7 +11,7 @@ noUiSlider.create(rmsSlider, {
     tooltips: [true],
     step: 0.1,
     range: {
-        'min': 0,
+        'min': 0.1,
         'max': 10
     }
 });
@@ -31,25 +31,25 @@ noUiSlider.create(fdSlider, {
     tooltips: [true],
     step: 1,
     range: {
-        'min': 1,
+        'min': 6,
         'max': 30
     }
 });
 
 noUiSlider.create(fifSlider, {
-    start: [2.5],
+    start: [1.533],
     tooltips: [true],
-    step: 0.1,
+    step: 0.511,
     range: {
-        'min': 0.1,
-        'max': 5
+        'min': 0.511,
+        'max': 3.066
     }
 });
 
 noUiSlider.create(tsSlider, {
     start: [1],
     tooltips: [true],
-    step: 0.05,
+    step: 0.9,
     range: {
         'min': 0.1,
         'max': 1
@@ -90,13 +90,10 @@ function addPeriods(mCode, periods){
 
 function corr(input1Arg,input2Arg){
 	var input1 = input1Arg, input2 = input2Arg;
-	console.log('Вход1',input1);
-	console.log('Вход2',input2);
 	var N1 = input1.length,
 		N2 = input2.length,
 		output = [],
         norm, sum,  i, j;
-    console.log('N1',N1, 'N2', N2);
     for (i = 0; i < 2*N1; i++) {
         sum = 0;
         for (j = 0; j < N2; j++) {
@@ -104,7 +101,6 @@ function corr(input1Arg,input2Arg){
         }
         output[i] = sum;
     }
-    console.log('ВЫХОД',output);
     return output;
 }
 
@@ -118,7 +114,7 @@ function extendArr(arr, n){
 	return output;
 } 
 
-function genChart(ctx, xdata, ydata, label, color){
+function genChart(ctx, xdata, ydata, label, color, xlabel, ylabel){
 	
 	var data = {
 		labels: xdata,
@@ -154,11 +150,21 @@ function genChart(ctx, xdata, ydata, label, color){
 	    	maintainAspectRatio: false,
 	    	scales: {
        		    xAxes: [{
+       		    	scaleLabel: {
+        				display: true,
+        				labelString: xlabel
+      				},
 				    ticks: {
        				autoSkip: true,
         			maxTicksLimit: 20
    					}
-				}]
+				}],
+				yAxes: [{
+       		    	scaleLabel: {
+        				display: true,
+        				labelString: ylabel
+      				}
+      			}]	
        		}
 	    }
 	});
@@ -190,7 +196,6 @@ function xArgs(size){
 
 function normalizeByMax(arr){
 	var max = Math.max.apply(null, arr);
-	console.log(max);
 	for(var i = 0; i < arr.length; i++){
 		arr[i] = arr[i] / max ;
 	}
@@ -276,18 +281,18 @@ function genCode(){
 		lineChart1.clear();
 		lineChart1.destroy();
 		
-		lineChart1 = genChart(ctx1, xArgs(signal.length), signal, "М-ПОСЛЕДОВАТЕЛЬНОСТЬ 512",color);
+		lineChart1 = genChart(ctx1, xArgs(signal.length), signal, "М-ПОСЛЕДОВАТЕЛЬНОСТЬ 511",color,"№ отсчёта", "U, В");
 	}else{
-		lineChart1 = genChart(ctx1, xArgs(signal.length), signal, "М-ПОСЛЕДОВАТЕЛЬНОСТЬ 512",color);
+		lineChart1 = genChart(ctx1, xArgs(signal.length), signal, "М-ПОСЛЕДОВАТЕЛЬНОСТЬ 511",color,"№ отсчёта", "U, В");
 	}
 
 	if(lineChart2){
 		lineChart2.clear();
 		lineChart2.destroy();
 		
-		lineChart2 = genChart(ctx2, xArgs(aCorr.length), aCorr, "АКФ",color);
+		lineChart2 = genChart(ctx2, xArgs(aCorr.length), aCorr, "АКФ",color,"№ отсчёта", "E, Дж");
 	}else{
-		lineChart2 = genChart(ctx2, xArgs(aCorr.length), aCorr, "АКФ",color);
+		lineChart2 = genChart(ctx2, xArgs(aCorr.length), aCorr, "АКФ",color,"№ отсчёта", "Е, Дж");
 	}
 	
 	// var mCodeExt = extendArr(mCode512, expansivity); 
@@ -302,27 +307,27 @@ function genCode(){
  //    fft.forward(aCorrExt);
 
 
-	addZerosForPow2(signal, periods);
+	// addZerosForPow2(signal, periods);
 
- 	var signalExt = extendArr(signal, expansivity);
+ // 	var signalExt = extendArr(signal, expansivity);
 
 
 
-	var fft = new FFT(signalExt.length, 44100);
-    fft.forward(signalExt);
-    var spectrum = fft.spectrum;
+	// var fft = new FFT(signalExt.length, 44100);
+ //    fft.forward(signalExt);
+ //    var spectrum = fft.spectrum;
 
-    normalizeByMax(spectrum);
-    translateToDB(spectrum);
+ //    normalizeByMax(spectrum);
+ //    translateToDB(spectrum);
 
-	if(lineChart3){
-		lineChart3.clear();
-		lineChart3.destroy();
+	// if(lineChart3){
+	// 	lineChart3.clear();
+	// 	lineChart3.destroy();
 		
-		lineChart3 = genChart(ctx3, xArgs(spectrum.length), spectrum, "СПМ",color);
-	}else{
-		lineChart3 = genChart(ctx3, xArgs(spectrum.length), spectrum, "СПМ",color);
-	}
+	// 	lineChart3 = genChart(ctx3, xArgs(spectrum.length), spectrum, "СПМ",color);
+	// }else{
+	// 	lineChart3 = genChart(ctx3, xArgs(spectrum.length), spectrum, "СПМ",color);
+	// }
 }
 
 function genСountDown(ts, fd){
@@ -386,16 +391,13 @@ function addZerosToPow2(signal){
 			signal.push(0)
 		}
 	}
-	console.log(signal);
 }
 
 function getCodePhasesIndexes(phases, N){
-	console.log(phases);
 	var indexes = [];
 	for(var i = 0; i < phases.length; i++){
 		indexes[i] = Math.floor(phases[i] % N);
 	}
-	console.log(indexes);
 	return indexes;
 }
 function getCode(code, indexes){
@@ -432,11 +434,11 @@ function genSignal(){
 	var startReg = readReg();
 	var fd = fdSlider.noUiSlider.get() * 1e6,
 		fif = fifSlider.noUiSlider.get() * 1e6,
-		fc = 0.511e6,
+		fc = 0.51e6,
 		codeLength = 511,
 		ts = tsSlider.noUiSlider.get() * 1e-3,
-		сarrPh0 = 0,
-		codePh0 = 5000;
+		сarrPh0 = Math.PI/2,
+		codePh0 = 0;
 
 	var t = genСountDown(ts, fd);
 
@@ -450,9 +452,9 @@ function genSignal(){
 		lineChart1.clear();
 		lineChart1.destroy();
 		
-		lineChart1 = genChart(ctx1, tFormat.slice(0,100), carrier.slice(0,100), "Несущая (первые 100 отсчётов)",color);
+		lineChart1 = genChart(ctx1, tFormat.slice(0,1000), carrier.slice(0,1000), "Несущая (первые 1000 отсчётов)",color, 't, c', 'U, В');
 	}else{
-		lineChart1 = genChart(ctx1, tFormat.slice(0,100), carrier.slice(0,100), "Несущая (первые 100 отсчётов)",color);
+		lineChart1 = genChart(ctx1, tFormat.slice(0,1000), carrier.slice(0,1000), "Несущая (первые 1000 отсчётов)",color, 't, c', 'U, В');
 	}
 
 
@@ -468,9 +470,9 @@ function genSignal(){
 		lineChart2.clear();
 		lineChart2.destroy();
 		
-		lineChart2 = genChart(ctx2, tFormat.slice(0,100), code.slice(0,100), "М-последовательность 511 для отсчётов времени (100 отсчётов)",color);
+		lineChart2 = genChart(ctx2, tFormat.slice(0,1000), code.slice(0,1000), "М-последовательность 511 для отсчётов времени (1000 отсчётов)",color,'t, c', 'U, В');
 	}else{
-		lineChart2 = genChart(ctx2, tFormat.slice(0,100),code.slice(0,100), "М-последовательность 511 для отсчётов времени (100 отсчётов)" ,color);
+		lineChart2 = genChart(ctx2, tFormat.slice(0,1000),code.slice(0,1000), "М-последовательность 511 для отсчётов времени (1000 отсчётов)" ,color, 't, c', 'U, В');
 	}
 
 	var signal = mulSiganlCode(carrier,code);
@@ -479,9 +481,9 @@ function genSignal(){
 		lineChart3.clear();
 		lineChart3.destroy();
 		
-		lineChart3 = genChart(ctx3, tFormat.slice(0,100), signal.slice(0,100), "Несушая после модуляции (первые 100 отсчётов)",color);
+		lineChart3 = genChart(ctx3, tFormat.slice(0,1000), signal.slice(0,1000), "Несушая после модуляции (первые 1000 отсчётов)",color, 't, c', 'U, В');
 	}else{
-		lineChart3 = genChart(ctx3, tFormat.slice(0,100), signal.slice(0,100), "Несущая после модуляции (первые 100 отсчётов)",color);
+		lineChart3 = genChart(ctx3, tFormat.slice(0,1000), signal.slice(0,1000), "Несущая после модуляции (первые 1000 отсчётов)",color, 't, c', 'U, В');
 	}
 
 	addZerosToPow2(carrier);
@@ -502,9 +504,9 @@ function genSignal(){
 		lineChart4.clear();
 		lineChart4.destroy();
 		
-		lineChart4 = genChart(ctx4, f, spectrumCar, "Спектр несущей",color);
+		lineChart4 = genChart(ctx4, f, spectrumCar, "Спектр несущей",color, 'f, Гц', 'S, дБ');
 	}else{
-		lineChart4 = genChart(ctx4, f, spectrumCar, "Спепктр несущей",color);
+		lineChart4 = genChart(ctx4, f, spectrumCar, "Спепктр несущей",color, 'f, Гц', 'S, дБ');
 	}    
 
 	addZerosToPow2(signal);
@@ -518,24 +520,45 @@ function genSignal(){
 		lineChart5.clear();
 		lineChart5.destroy();
 		
-		lineChart5 = genChart(ctx5, f, spectrumSignal, "Спектр модулированного сигнала",color);
+		lineChart5 = genChart(ctx5, f, spectrumSignal, "Спектр модулированного сигнала",color, 'f, Гц', 'S, дБ');
 	}else{
-		lineChart5 = genChart(ctx5, f, spectrumSignal, "Спектр модулированного сигнала ",color);
+		lineChart5 = genChart(ctx5, f, spectrumSignal, "Спектр модулированного сигнала ",color, 'f, Гц', 'S, дБ');
 	}
 }
 
 
+function removeCharts(){
+	if(lineChart1){
+		lineChart1.clear();
+
+	}
+	if(lineChart2){
+		lineChart2.clear();
+
+	}
+	if(lineChart3){
+		lineChart3.clear();
+
+	}
+	if(lineChart4){
+		lineChart4.clear();
+
+	}
+	if(lineChart5){
+		lineChart5.clear();
 	
+	}
+}	
 
 lab_mCode512.onclick = genCode;
 lab_signal.onclick = genSignal;
 lab_addNoise.onchange = function(){
 	document.querySelector(".lab-gnss-signals_options_add-noise__RMS").classList.toggle('lab-gnss-signals_options_add-noise__RMS--active');
-	document.querySelector('.lab-gnss-signals_options_add-noise_RMS__SNR').innerHTML = convertRMSToSNR(rmsSlider.noUiSlider.get());
+	document.querySelector('.lab-gnss-signals_options_add-noise_RMS__SNR').innerHTML = convertRMSToSNR(rmsSlider.noUiSlider.get()).toFixed(2) + ' дБ';
 };
 lab_addDelay.onchange = function(){
 	document.querySelector(".lab-gnss-signals_options_add-delay__delay").classList.toggle('lab-gnss-signals_options_add-delay__delay--active');
 };
 rmsSlider.noUiSlider.on("change", function() {
-	document.querySelector('.lab-gnss-signals_options_add-noise_RMS__SNR').innerHTML = convertRMSToSNR(rmsSlider.noUiSlider.get());
+	document.querySelector('.lab-gnss-signals_options_add-noise_RMS__SNR').innerHTML = convertRMSToSNR(rmsSlider.noUiSlider.get()).toFixed(2) + ' дБ';
 });
