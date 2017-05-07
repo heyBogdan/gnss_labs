@@ -5,10 +5,16 @@ string1Params =[
             description:'Первый символ цифровой информации в каждой строке всегда "0". Он является "холостым" и дополняет укороченную ПСП МВ предыдущей строки до полной (не укороченной) ПС последовательности.'
         },
         digitsNum: 1,
-        lowDigitPrice:1,
-        range: '0..15',
-        unit: 'безразмерная',
-        value:0,
+        lowDigitPrice:'-',
+        range: '-',
+        unit: '-',
+        value:{
+            min:0,
+            max:0,
+            lowDigitPrice:1,
+            step:0,
+            total:0
+        },
     },
     {
         name:{
@@ -19,7 +25,13 @@ string1Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:1,
+        value:{
+            min:0,
+            max:15,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -30,19 +42,30 @@ string1Params =[
         lowDigitPrice:'-',
         range: '-',
         unit: '-',
-        value:0,
+        value:{
+            min:0,
+            max:0,
+            lowDigitPrice:1,
+            step:0,
+            total:null
+        },
     },
     {
         name:{
             value:'P1',
-            description:'признак смены оперативной информации; признак сообщает величину интервала времени между значениями tb (мин) в данном и предыдущем кадрах. 00 - 0 мин, 01 - 30 мин, 10 - 45 мин, 11 - 60 мин'
+            description:'признак смены оперативной информации; признак сообщает величину интервала времени между значениями tb (мин) в данном и предыдущем кадрах. 0 - 0 мин, 1 - 30 мин, 2 - 45 мин, 3 - 60 мин'
         },
         digitsNum: 2,
-        lowDigitPrice:'*',
-        range: '*',
-        unit: '*',
-        value:null,
-        descritption:''
+        lowDigitPrice:'1',
+        range: '0..3',
+        unit: 'безразмерная',
+        value:{
+            min:0,
+            max:3,
+            lowDigitPrice:1,
+            step:1,
+            total:null            
+        },
     },
     {
         name:{
@@ -53,7 +76,13 @@ string1Params =[
         lowDigitPrice:1,
         range: '0..23',
         unit: 'час',
-        value:null
+        value:{
+            min:0,
+            max:23,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -64,7 +93,13 @@ string1Params =[
         lowDigitPrice:1,
         range: '0..59',
         unit: 'мин',
-        value:null
+        value:{
+            min:0,
+            max:59,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -75,7 +110,13 @@ string1Params =[
         lowDigitPrice:30,
         range: '0;30',
         unit: 'с',
-        value:null
+        value:{
+            min:0,
+            max:30,
+            lowDigitPrice:30,
+            step:30,
+            total:null
+        }
     },
     {
         name:{
@@ -86,7 +127,13 @@ string1Params =[
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±4.3',
         unit: 'км/с',
-        value:null
+        value:{
+            min:-4.3,
+            max:4.3,
+            lowDigitPrice:Math.pow(2,-20),
+            step:0.01,
+            total:null
+        }
     },
     {
         name:{
@@ -97,7 +144,13 @@ string1Params =[
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±6.2e-9',
         unit: 'км/с<sup>2</sup>',
-        value:null
+        value:{
+            min:-0.0000000062,
+            max:0.0000000062,
+            lowDigitPrice:Math.pow(2,-30),
+            step:0.0000000001,
+            total:null
+        }
     },
     {
         name:{
@@ -108,7 +161,13 @@ string1Params =[
         lowDigitPrice:'2<sup>-11</sup>',
         range: '±2.7e4',
         unit: 'км',
-        value:null
+        value:{
+            min:-27000,
+            max:27000,
+            lowDigitPrice:Math.pow(2,-11),
+            step:1,
+            total:null
+        }
     }                                   
 ]
 
@@ -122,7 +181,13 @@ string2Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -133,7 +198,13 @@ string2Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:1,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -144,7 +215,13 @@ string2Params =[
         lowDigitPrice:1,
         range: '0..7',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -155,7 +232,13 @@ string2Params =[
         lowDigitPrice:1,
         range: '0;1',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -166,7 +249,13 @@ string2Params =[
         lowDigitPrice:15,
         range: '15..1425',
         unit: 'мин',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -188,7 +277,13 @@ string2Params =[
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±4.3',
         unit: 'км/с',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -199,7 +294,13 @@ string2Params =[
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±6.2e-9',
         unit: 'км/с<sup>2</sup>',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -210,7 +311,13 @@ string2Params =[
         lowDigitPrice:'2<sup>-11</sup>',
         range: '±2.7e4',
         unit: 'км',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     }                                   
 ]
 
@@ -224,7 +331,13 @@ string3Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -235,7 +348,13 @@ string3Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:1,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -246,7 +365,13 @@ string3Params =[
         lowDigitPrice:1,
         range: '0;1',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -257,7 +382,13 @@ string3Params =[
         lowDigitPrice:'2<sup>-40</sup>',
         range: '±2<sup>-30</sup>',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -279,7 +410,13 @@ string3Params =[
         lowDigitPrice:1,
         range: '00,01,10,11',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -290,7 +427,13 @@ string3Params =[
         lowDigitPrice:1,
         range: '0;1',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -301,7 +444,13 @@ string3Params =[
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±4.3',
         unit: 'км/с',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -312,7 +461,13 @@ string3Params =[
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±6.2e-9',
         unit: 'км/с<sup>2</sup>',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -323,7 +478,13 @@ string3Params =[
         lowDigitPrice:'2<sup>-11</sup>',
         range: '±2.7e4',
         unit: 'км',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     }                                  
 ]
 
@@ -337,7 +498,13 @@ string4Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -348,7 +515,13 @@ string4Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:1,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -359,7 +532,13 @@ string4Params =[
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±2<sup>-9</sup>',
         unit: 'с',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -370,7 +549,13 @@ string4Params =[
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±13.97e-9',
         unit: 'с',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -381,7 +566,13 @@ string4Params =[
         lowDigitPrice:1,
         range: '0..31',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -403,7 +594,13 @@ string4Params =[
         lowDigitPrice:1,
         range: '0;1',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -414,7 +611,13 @@ string4Params =[
         lowDigitPrice:'*',
         range: '*',
         unit: '*',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -436,7 +639,13 @@ string4Params =[
         lowDigitPrice:1,
         range: '0..1461',
         unit: 'сутки',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -447,7 +656,13 @@ string4Params =[
         lowDigitPrice:1,
         range: '0..31',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -458,7 +673,13 @@ string4Params =[
         lowDigitPrice:1,
         range: '0..3',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     }                                            
 ]
 
@@ -472,7 +693,13 @@ string5Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -483,7 +710,13 @@ string5Params =[
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:1,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -494,7 +727,13 @@ string5Params =[
         lowDigitPrice:1,
         range: '0..1461',
         unit: 'сутки',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -505,7 +744,13 @@ string5Params =[
         lowDigitPrice:'2<sup>-31</sup>',
         range: '±1',
         unit: 'с',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -527,7 +772,13 @@ string5Params =[
         lowDigitPrice:1,
         range: '1-31',
         unit: '4-х летний интервал',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -538,7 +789,13 @@ string5Params =[
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±1.9e-3',
         unit: 'c',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -549,7 +806,13 @@ string5Params =[
         lowDigitPrice:1,
         range: '0;1',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     }                                
 ]
 
@@ -563,7 +826,13 @@ string6Params = [
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -574,7 +843,13 @@ string6Params = [
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:1,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -585,7 +860,13 @@ string6Params = [
         lowDigitPrice:1,
         range: '0..1',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -596,7 +877,13 @@ string6Params = [
         lowDigitPrice:1,
         range: '0..3',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -607,7 +894,13 @@ string6Params = [
         lowDigitPrice:1,
         range: '1..24',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -618,7 +911,13 @@ string6Params = [
         lowDigitPrice:'2<sup>-18</sup>',
         range: '±1.9e-3',
         unit: 'c',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -629,7 +928,13 @@ string6Params = [
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±1',
         unit: 'полуцикл',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -640,7 +945,13 @@ string6Params = [
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±0.067',
         unit: 'полуцикл',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -651,7 +962,13 @@ string6Params = [
         lowDigitPrice:'2<sup>-20</sup>',
         range: '0..0.03',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     }                               
 ]
 
@@ -665,7 +982,13 @@ string7Params = [
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -676,7 +999,13 @@ string7Params = [
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:1,
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        },
     },
     {
         name:{
@@ -687,7 +1016,13 @@ string7Params = [
         lowDigitPrice:'2<sup>-15</sup>',
         range: '±1',
         unit: 'полуцикл',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -698,7 +1033,13 @@ string7Params = [
         lowDigitPrice:'2<sup>-5</sup>',
         range: '0..44100',
         unit: 'c',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -709,7 +1050,13 @@ string7Params = [
         lowDigitPrice:'2<sup>-9</sup>',
         range: '±3.6e3',
         unit: 'c/виток',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -720,7 +1067,13 @@ string7Params = [
         lowDigitPrice:'2<sup>-14</sup>',
         range: '±2<sup>-8</sup>',
         unit: 'c/виток<sup>2<sup>',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -731,7 +1084,13 @@ string7Params = [
         lowDigitPrice:'1',
         range: '0..31',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     },
     {
         name:{
@@ -742,7 +1101,13 @@ string7Params = [
         lowDigitPrice:1,
         range: '0;1',
         unit: 'безразмерная',
-        value:null
+        value:{
+            min:0,
+            max:1,
+            lowDigitPrice:1,
+            step:1,
+            total:null
+        }
     }                                   
 ]
 
@@ -853,10 +1218,15 @@ function renderTable(string, stringNum, frameNum){
                 row.appendChild(cell);
                 continue;
             }
-            if(key == 'value'){
+            if(key == 'value') {
                var cellValue = document.createElement('input');
                cellValue.type = 'number';
-               cell.setAttribute('data-param-name', key)
+               cellValue.setAttribute('max', param[key].max);
+               cellValue.setAttribute('min', param[key].min);
+               cellValue.setAttribute('step', param[key].step);
+               cellValue.setAttribute('data-lowdigitprice',param[key].lowDigitPrice);
+               cell.setAttribute('data-param-name', key);
+
                cell.appendChild(cellValue);
                row.appendChild(cell);
                continue;
@@ -934,19 +1304,48 @@ function showNavStrings(option){
 makeList(superFrame,frames);
 makeTables(superFrame,frames);
 
-function translateToBinary(value, elem){
-    var digitsNum = parseInt(elem.querySelector('[data-param-name="digitsNum"]').innerHTML);
-    var result = value.toString(2);
+function translateToBinary(input){
+    var digitsNum = parseInt(input.parentElement.parentElement.querySelector('[data-param-name="digitsNum"]').innerHTML);
+    var value = parseFloat(input.value) < 0 ? -parseFloat(input.value): parseFloat(input.value);
+    var lowDigitPrice = parseFloat(input.getAttribute('data-lowdigitprice'));
+    var result = Math.round(value/lowDigitPrice).toString(2);
+
     while(result.length < digitsNum){
+        if((parseFloat(input.value) < 0) && (input.min < 0) && (result.length == (digitsNum - 1)) ){
+            result = '1' + result;
+            continue;
+        }
         result = '0' + result ;
     } 
     return result;
+}
+
+function validateParamValues(inputs){
+    for(var i = 0; i < inputs.length; i++){
+        if(!inputs[i].value){
+            toastr.error('Для формирования строки необходимо ввести значение для каждого слова');
+            return false;
+        }    
+        if(parseFloat(inputs[i].value) < parseFloat(inputs[i].min)){
+            toastr.error('Одно из ведённых значений меньше допустимого');
+            return false;            
+        } 
+        if(parseFloat(inputs[i].value) > parseFloat(inputs[i].max)){
+            toastr.error('Одно из ведённых значений больше допустимого');
+            return false;            
+        } 
+    }
+    return true;
 }
 
 generateStringBtn.addEventListener('click',function(e){
     e.preventDefault();
     document.querySelector('.working-area__string--decimial').innerHTML = '';
     document.querySelector('.working-area__string--binary').innerHTML = '';
+
+    if(!validateParamValues(currentActiveTable.querySelectorAll('input'))) return;
+
+    var finalString = '';
     currentActiveTable.querySelectorAll('input').forEach(function(input){
         var stringPartElem = document.createElement('span');
         stringPartElem.style.padding = '0 3px'
@@ -954,9 +1353,12 @@ generateStringBtn.addEventListener('click',function(e){
         document.querySelector('.working-area__string--decimial').appendChild(stringPartElem);
         var stringPartElem2 = document.createElement('span');
         stringPartElem2.style.padding = '0 3px'
-        stringPartElem2.innerHTML = translateToBinary(parseInt(input.value), input.parentElement.parentElement );
+        finalString += translateToBinary(input);  
+        
+        stringPartElem2.innerHTML = translateToBinary(input );
         document.querySelector('.working-area__string--binary').appendChild(stringPartElem2);        
     });
+    document.querySelector('.working-area__string--binary').innerHTML += '<p>Общее количество символов: ' + finalString.length + '</p>';
 })
 
 $(function () {

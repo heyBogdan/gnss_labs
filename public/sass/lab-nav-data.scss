@@ -16,8 +16,13 @@
         width:90%;
         margin:0 auto;
     }
-    .table tbody{
-        display: none;
+    .table{ 
+        tbody{
+            display: none;
+        }
+        input{
+            width:100px;
+        }    
     }
     .frame{
         font-size: 16px;
