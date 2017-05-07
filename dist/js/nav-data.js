@@ -1,38 +1,54 @@
 string1Params =[
     {
-        name:'hs',
+        name:{
+            value:'hs',
+            description:'Первый символ цифровой информации в каждой строке всегда "0". Он является "холостым" и дополняет укороченную ПСП МВ предыдущей строки до полной (не укороченной) ПС последовательности.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0
+        value:0,
     },
     {
-        name:'m',
+        name:{
+            value:'m',
+            description:'номер строки в навигационном кадре'
+        },    
         digitsNum: 4,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:1
+        value:1,
     },
     {
-        name:'-',
+        name:{
+            value:'-',
+            description:'резерв, предусмотренный на случай изменений и дополнений в структуре навигационного сообщения.'
+        },    
         digitsNum: 2,
         lowDigitPrice:'-',
         range: '-',
         unit: '-',
-        value:0
+        value:0,
     },
     {
-        name:'P1',
+        name:{
+            value:'P1',
+            description:'признак смены оперативной информации; признак сообщает величину интервала времени между значениями tb (мин) в данном и предыдущем кадрах. 00 - 0 мин, 01 - 30 мин, 10 - 45 мин, 11 - 60 мин'
+        },
         digitsNum: 2,
         lowDigitPrice:'*',
         range: '*',
         unit: '*',
-        value:null
+        value:null,
+        descritption:''
     },
     {
-        name:'t<sub>k</sub>',
+        name:{
+            value:'t<sub>k</sub>',
+            description:'Время начала кадра внутри текущих суток, исчисляемое в шкале бортового времени. Количество целых часов, прошедших с начала текущих суток'
+        },
         digitsNum: 5,
         lowDigitPrice:1,
         range: '0..23',
@@ -40,7 +56,10 @@ string1Params =[
         value:null
     },
     {
-        name:'t<sub>k</sub>',
+        name:{
+            value:'t<sub>k</sub>',
+            description:'Время начала кадра внутри текущих суток, исчисляемое в шкале бортового времени. Количество целых минут'
+        },
         digitsNum: 6,
         lowDigitPrice:1,
         range: '0..59',
@@ -48,7 +67,10 @@ string1Params =[
         value:null
     },
     {
-        name:'t<sub>k</sub>',
+        name:{
+            value:'t<sub>k</sub>',
+            description:'Время начала кадра внутри текущих суток, исчисляемое в шкале бортового времени. Количество 30-секундных интервалов, прошедших с начала текущей минуты'
+        },
         digitsNum: 1,
         lowDigitPrice:30,
         range: '0;30',
@@ -56,7 +78,10 @@ string1Params =[
         value:null
     },
     {
-        name:"x<sub>n</sub>'(t<sub>b</sub>)",
+        name:{
+            value:"x<sub>n</sub>'(t<sub>b</sub>)",
+            description:'составляющая вектора скорости n-го НКА в системе координат ПЗ-90.02 на момент времени tb'
+        },   
         digitsNum: 24,
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±4.3',
@@ -64,7 +89,10 @@ string1Params =[
         value:null
     },
     {
-        name:"x<sub>n</sub>''(t<sub>b</sub>)",
+        name:{
+            value:"x<sub>n</sub>''(t<sub>b</sub>)",
+            description:'составляющая ускорения n-го НКА в системе координат ПЗ-90.02 на момент времени t b, обусловленные действием Луны и Солнца'
+        },
         digitsNum: 5,
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±6.2e-9',
@@ -72,7 +100,10 @@ string1Params =[
         value:null
     },
     {
-        name:"x<sub>n</sub>(t<sub>b</sub>)",
+        name:{
+            value:"x<sub>n</sub>(t<sub>b</sub>)",
+            description:' координата n-го НКА в системе координат ПЗ-90.02 на момент времени t b; '
+        },
         digitsNum: 27,
         lowDigitPrice:'2<sup>-11</sup>',
         range: '±2.7e4',
@@ -83,23 +114,32 @@ string1Params =[
 
 string2Params =[
     {
-        name:'hs',
+        name:{
+            value:'hs',
+            description:'Первый символ цифровой информации в каждой строке всегда "0". Он является "холостым" и дополняет укороченную ПСП МВ предыдущей строки до полной (не укороченной) ПС последовательности.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0
+        value:0,
     },
     {
-        name:'m',
+        name:{
+            value:'m',
+            description:'номер строки в навигационном кадре'
+        },    
         digitsNum: 4,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:2
+        value:1,
     },
     {
-        name:'B<sub>n</sub>',
+        name:{
+            value:'B<sub>n</sub>',
+            description:'признак недостоверности кадра n-го НКА. Навигационной аппаратурой потребителя анализируется только старший разряд этого слова, "1" в котором обозначает факт непригодности данного НКА для проведения сеансов измерений. Второй и третий разряды этого слова аппаратурой потребителя не анализируются;'
+        },    
         digitsNum: 3,
         lowDigitPrice:1,
         range: '0..7',
@@ -107,7 +147,10 @@ string2Params =[
         value:null
     },
     {
-        name:'P2',
+        name:{
+            value:'P2',
+            description:'признак нечетности ("1") или четности ("0") числового значения слова tb (для интервалов 30 или 60 минут)'
+        },    
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0;1',
@@ -115,7 +158,10 @@ string2Params =[
         value:null
     },
     {
-        name:'t<sub>b</sub>',
+        name:{
+            value:'t<sub>b</sub>',
+            description:'порядковый номер временного интервала внутри текущих суток по шкале системного времени ГЛОНАСС, к середине которого относится передаваемая в кадре оперативная информация. Длительность данного временного интервала и, следовательно, максимальное значение слова t b определяются значением слова P1'
+        },    
         digitsNum: 7,
         lowDigitPrice:15,
         range: '15..1425',
@@ -123,23 +169,21 @@ string2Params =[
         value:null
     },
     {
-        name:'-',
-        digitsNum: 6,
-        lowDigitPrice:1,
-        range: '0..59',
-        unit: 'мин',
-        value:null
+        name:{
+            value:'-',
+            description:'резерв, предусмотренный на случай изменений и дополнений в структуре навигационного сообщения.'
+        },    
+        digitsNum: 5,
+        lowDigitPrice:'-',
+        range: '-',
+        unit: '-',
+        value:0,
     },
     {
-        name:'t<sub>b</sub>',
-        digitsNum: 1,
-        lowDigitPrice:30,
-        range: '0;30',
-        unit: 'с',
-        value:null
-    },
-    {
-        name:"y<sub>n</sub>'(t<sub>b</sub>)",
+        name:{
+            value:"y<sub>n</sub>'(t<sub>b</sub>)",
+            description:'составляющая вектора скорости n-го НКА в системе координат ПЗ-90.02 на момент времени tb'
+        },   
         digitsNum: 24,
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±4.3',
@@ -147,7 +191,10 @@ string2Params =[
         value:null
     },
     {
-        name:"y<sub>n</sub>''(t<sub>b</sub>)",
+        name:{
+            value:"y<sub>n</sub>''(t<sub>b</sub>)",
+            description:'составляющая ускорения n-го НКА в системе координат ПЗ-90.02 на момент времени t b, обусловленные действием Луны и Солнца'
+        },
         digitsNum: 5,
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±6.2e-9',
@@ -155,7 +202,10 @@ string2Params =[
         value:null
     },
     {
-        name:"y<sub>n</sub>(t<sub>b</sub>)",
+        name:{
+            value:"y<sub>n</sub>(t<sub>b</sub>)",
+            description:' координата n-го НКА в системе координат ПЗ-90.02 на момент времени t b; '
+        },
         digitsNum: 27,
         lowDigitPrice:'2<sup>-11</sup>',
         range: '±2.7e4',
@@ -166,23 +216,32 @@ string2Params =[
 
 string3Params =[
     {
-        name:'hs',
+        name:{
+            value:'hs',
+            description:'Первый символ цифровой информации в каждой строке всегда "0". Он является "холостым" и дополняет укороченную ПСП МВ предыдущей строки до полной (не укороченной) ПС последовательности.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0
+        value:0,
     },
     {
-        name:'m',
+        name:{
+            value:'m',
+            description:'номер строки в навигационном кадре'
+        },    
         digitsNum: 4,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:3
+        value:1,
     },
     {
-        name:'P3',
+        name:{
+            value:'P3',
+            description:'признак, состояние "1" которого означает, что в данном кадре передается альманах для 5-ти НКА системы, а состояние "0" означает, что в данном кадре передается альманах для 4-х НКА'
+        },    
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0;1',
@@ -190,7 +249,10 @@ string3Params =[
         value:null
     },
     {
-        name:'γ<sub>n</sub>(t<sub>b</sub>)',
+        name:{
+            value:'γ<sub>n</sub>(t<sub>b</sub>)',
+            description:' относительное отклонение прогнозируемого значения несущей частоты излучаемого навигационного радиосигнала n-го НКА от номинального значения на момент времени tb. γn(tb) = (fn(tb) - fнn )/fнn , где fn(tb) - прогнозируемое значение несущей частоты излучаемого навигационного радиосигнала n-го НКА с учетом гравитационного и релятивистского эффектов на момент времени tb;  fнn - номинальное значение несущей частоты навигационного радиосигнала n-го НКА.'
+        },
         digitsNum: 11,
         lowDigitPrice:'2<sup>-40</sup>',
         range: '±2<sup>-30</sup>',
@@ -198,15 +260,21 @@ string3Params =[
         value:null
     },
     {
-        name:'-',
+        name:{
+            value:'-',
+            description:'резерв, предусмотренный на случай изменений и дополнений в структуре навигационного сообщения.'
+        },    
         digitsNum: 1,
-        lowDigitPrice:1,
+        lowDigitPrice:'-',
         range: '-',
         unit: '-',
-        value:null
+        value:0,
     },
     {
-        name:'P',
+        name:{
+            value:'P',
+            description:' признак режима работы НКА по ЧВИ (1)..Значения признака следующие:  00 – ретрансляция параметра τс, ретрансляция параметра τGPS;  01 - ретрансляция параметра τс, размножение параметра τGPS на борту НКА;  10 - размножение параметра τс на борту НКА, ретрансляция параметра τGPS;  11 - размножение параметра τс на борту НКА, размножение параметра τGPS на борту НКА.'
+        },
         digitsNum: 2,
         lowDigitPrice:1,
         range: '00,01,10,11',
@@ -214,7 +282,10 @@ string3Params =[
         value:null
     },
     {
-        name:'l<sub>n</sub>',
+        name:{
+            value:'l<sub>n</sub>',
+            description:' признак недостоверности кадра n-го НКА; ln = 0 свидетельствует о пригодности НКА для навигации;  ln = 1 означает факт непригодности данного НКА для навигации.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0;1',
@@ -222,7 +293,10 @@ string3Params =[
         value:null
     },
     {
-        name:"z<sub>n</sub>'(t<sub>b</sub>)",
+        name:{
+            value:"z<sub>n</sub>'(t<sub>b</sub>)",
+            description:'составляющая вектора скорости n-го НКА в системе координат ПЗ-90.02 на момент времени tb'
+        },   
         digitsNum: 24,
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±4.3',
@@ -230,7 +304,10 @@ string3Params =[
         value:null
     },
     {
-        name:"z<sub>n</sub>''(t<sub>b</sub>)",
+        name:{
+            value:"z<sub>n</sub>''(t<sub>b</sub>)",
+            description:'составляющая ускорения n-го НКА в системе координат ПЗ-90.02 на момент времени t b, обусловленные действием Луны и Солнца'
+        },
         digitsNum: 5,
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±6.2e-9',
@@ -238,34 +315,46 @@ string3Params =[
         value:null
     },
     {
-        name:"z<sub>n</sub>(t<sub>b</sub>)",
+        name:{
+            value:"z<sub>n</sub>(t<sub>b</sub>)",
+            description:' координата n-го НКА в системе координат ПЗ-90.02 на момент времени t b; '
+        },
         digitsNum: 27,
         lowDigitPrice:'2<sup>-11</sup>',
         range: '±2.7e4',
         unit: 'км',
         value:null
-    }                                   
+    }                                  
 ]
 
 string4Params =[
     {
-        name:'hs',
+        name:{
+            value:'hs',
+            description:'Первый символ цифровой информации в каждой строке всегда "0". Он является "холостым" и дополняет укороченную ПСП МВ предыдущей строки до полной (не укороченной) ПС последовательности.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0
+        value:0,
     },
     {
-        name:'m',
+        name:{
+            value:'m',
+            description:'номер строки в навигационном кадре'
+        },    
         digitsNum: 4,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:4
+        value:1,
     },
     {
-        name:'τ<sub>n</sub>(t<sub>b</sub>)',
+        name:{
+            value:'τ<sub>n</sub>(t<sub>b</sub>)',
+            description:'сдвиг шкалы времени n-го НКА t n относительно шкалы времени системы ГЛОНАСС tc, равный смещению по фазе ПСПД излучаемого навигационного радиосигнала n-го НКА относительно системного опорного сигнала на момент времени tb, выраженный в единицах времени     τn (t b) = tc (tb ) - tn (tb )'
+        },
         digitsNum: 22,
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±2<sup>-9</sup>',
@@ -273,7 +362,10 @@ string4Params =[
         value:null
     },
     {
-        name:'Δτ<sub>n</sub>(t<sub>b</sub>)',
+        name:{
+            value:'Δτ<sub>n</sub>(t<sub>b</sub>)',
+            description:' смещение излучаемого навигационного радиосигнала поддиапазона L2 относительно навигационного радиосигнала поддиапазона L1 для n-го НКА.     Δτn = tf2 – tf1, где tf1, tf2 – аппаратурные задержки в соответствующих поддиапазонах, выраженные в единицах времени;'
+        },
         digitsNum: 5,
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±13.97e-9',
@@ -281,7 +373,10 @@ string4Params =[
         value:null
     },
     {
-        name:'E<sub>n</sub>',
+        name:{
+            value:'E<sub>n</sub>',
+            description:'характеризует "возраст" оперативной информации, то есть интервал времени, прошедший от момента расчета (закладки) оперативной информации до момента времени tb для n-го НКА. Слово En формируется на борту НКА. '
+        },
         digitsNum: 5,
         lowDigitPrice:1,
         range: '0..31',
@@ -289,15 +384,21 @@ string4Params =[
         value:null
     },
     {
-        name:'-',
+        name:{
+            value:'-',
+            description:'резерв, предусмотренный на случай изменений и дополнений в структуре навигационного сообщения.'
+        },    
         digitsNum: 14,
         lowDigitPrice:'-',
         range: '-',
         unit: '-',
-        value:null
+        value:0,
     },
     {
-        name:'P4',
+        name:{
+            value:'P4',
+            description:' признак того, что на текущем интервале времени tb средствами ПКУ на НКА заложена (1) или не заложена (0) обновленная эфемеридная или частотно-временная информация.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0;1',
@@ -305,7 +406,10 @@ string4Params =[
         value:null
     },
     {
-        name:"F<sub>T</sub>",
+        name:{
+            value:"F<sub>T</sub>",
+            description:'фактор точности измерений, характеризующий в виде эквивалентной ошибки прогнозируемую ошибку измерения псевдодальности, обусловленную набором данных (эфемеридная и частотно-временная информация), излучаемых в навигационном сообщении на момент времени tb. 0 - 1 м, 1 - 2 м, 2 - 2.5 м, 3 - 4 м, 4 - 5 м, 5 - 7 м, 6 - 10 м, 7 - 12 м, 8 - 14 м, 9 - 16 м, 10 - 32 м, 11 - 64 м, 12 - 128 м, 13 - 256 м, 14 - 512 м, 15 - не импользуется '
+        },
         digitsNum: 4,
         lowDigitPrice:'*',
         range: '*',
@@ -313,15 +417,21 @@ string4Params =[
         value:null
     },
     {
-        name:"-",
+        name:{
+            value:'-',
+            description:'резерв, предусмотренный на случай изменений и дополнений в структуре навигационного сообщения.'
+        },    
         digitsNum: 3,
         lowDigitPrice:'-',
         range: '-',
         unit: '-',
-        value:null
+        value:0,
     },
     {
-        name:"N<sub>T</sub>",
+        name:{
+            value:"N<sub>T</sub>",
+            description:'текущая дата, календарный номер суток внутри четырехлетнего интервала, начиная с 1-го января високосного года'
+        },
         digitsNum: 11,
         lowDigitPrice:1,
         range: '0..1461',
@@ -329,7 +439,10 @@ string4Params =[
         value:null
     },
     {
-        name:"n",
+        name:{
+            value:"n",
+            description:'номер НКА, излучающего данный навигационный сигнал и соответствующий его рабочей точке внутри орбитальной группировки ГЛОНАСС'
+        },
         digitsNum: 5,
         lowDigitPrice:1,
         range: '0..31',
@@ -337,7 +450,10 @@ string4Params =[
         value:null
     },
     {
-        name:"M",
+        name:{
+            value:"M",
+            description:' модификация НКА, излучающего данный навигационный сигнал. Значение "00" означает НКА «Глонасс», "01" – НКА «Глонасс-М»'
+        },
         digitsNum: 2,
         lowDigitPrice:1,
         range: '0..3',
@@ -348,23 +464,32 @@ string4Params =[
 
 string5Params =[
     {
-        name:'hs',
+        name:{
+            value:'hs',
+            description:'Первый символ цифровой информации в каждой строке всегда "0". Он является "холостым" и дополняет укороченную ПСП МВ предыдущей строки до полной (не укороченной) ПС последовательности.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0
+        value:0,
     },
     {
-        name:'m',
+        name:{
+            value:'m',
+            description:'номер строки в навигационном кадре'
+        },    
         digitsNum: 4,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:5
+        value:1,
     },
     {
-        name:'N<sup>A</sup>',
+        name:{
+            value:'N<sup>A</sup>',
+            description:'календарный номер суток внутри четырехлетнего периода, начиная с високосного года, к которым относятся поправка τc и данные альманаха системы (альманах орбит и альманах фаз);'
+        },
         digitsNum: 11,
         lowDigitPrice:1,
         range: '0..1461',
@@ -372,7 +497,10 @@ string5Params =[
         value:null
     },
     {
-        name:'τ<sub>с</sub>',
+        name:{
+            value:'τ<sub>с</sub>',
+            description:'поправка к шкале времени системы ГЛОНАСС относительно UTC(SU). Поправка τc дана на начало суток с номером NA ; τc  = TUTC(SU) + 03 час 00 мин - TГЛ'
+        },
         digitsNum: 32,
         lowDigitPrice:'2<sup>-31</sup>',
         range: '±1',
@@ -380,15 +508,21 @@ string5Params =[
         value:null
     },
     {
-        name:'-',
+        name:{
+            value:'-',
+            description:'резерв, предусмотренный на случай изменений и дополнений в структуре навигационного сообщения.'
+        },    
         digitsNum: 1,
-        lowDigitPrice:1,
+        lowDigitPrice:'-',
         range: '-',
         unit: '-',
-        value:null
+        value:0,
     },
     {
-        name:'N<sub>4</sub>',
+        name:{
+            value:'N<sub>4</sub>',
+            description:'номер четырехлетнего периода, первый год первого четырехлетия  соответствует 1996 году'
+        },    
         digitsNum: 5,
         lowDigitPrice:1,
         range: '1-31',
@@ -396,7 +530,10 @@ string5Params =[
         value:null
     },
     {
-        name:'τ<sub>GPS</sub>',
+        name:{
+            value:'τ<sub>GPS</sub>',
+            description:'Слово τGPS – поправка на расхождение системных шкал времени GPS(TGPS) и ГЛОНАСС (ТГЛ) в соответствии со следующим выражением:     T GPS – TГЛ = ΔΤ + τGPS , где ΔΤ − целая часть, а τGPS - дробная часть расхождения шкал времени, выраженного в секундах. Примечание: Целая часть расхождения ΔΤ определяется потребителем из навигационного сообщения системы GPS;'
+        },
         digitsNum: 22,
         lowDigitPrice:'2<sup>-30</sup>',
         range: '±1.9e-3',
@@ -404,34 +541,46 @@ string5Params =[
         value:null
     },
     {
-        name:'l<sub>n</sub>',
+        name:{
+            value:'l<sub>n</sub>',
+            description:' признак недостоверности кадра n-го НКА; ln = 0 свидетельствует о пригодности НКА для навигации;  ln = 1 означает факт непригодности данного НКА для навигации.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0;1',
         unit: 'безразмерная',
         value:null
-    }                                 
+    }                                
 ]
 
 string6Params = [
     {
-        name:'hs',
+        name:{
+            value:'hs',
+            description:'Первый символ цифровой информации в каждой строке всегда "0". Он является "холостым" и дополняет укороченную ПСП МВ предыдущей строки до полной (не укороченной) ПС последовательности.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0
+        value:0,
     },
     {
-        name:'m',
+        name:{
+            value:'m',
+            description:'номер строки в навигационном кадре'
+        },    
         digitsNum: 4,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:6
+        value:1,
     },
     {
-        name:'C<sup>n</sup>',
+        name:{
+            value:'C<sup>n</sup>',
+            description:'обобщенный признак состояния НКА с номером n на момент закладки неоперативной информации (альманаха орбит и фаз). Значение признака Сn = 0 указывает на непригодность НКА для использования в сеансах навигационных определений, а значение признака Сn = 1 - на пригодность НКА.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0..1',
@@ -439,7 +588,10 @@ string6Params = [
         value:null
     },
     {
-        name:'M<sub>n</sub><sup>A</sup>',
+        name:{
+            value:'M<sub>n</sub><sup>A</sup>',
+            description:' признак модификации n-го НКА;  "00" -  «Глонасс», "01" -  «Глонасс-М»; '
+        },
         digitsNum: 2,
         lowDigitPrice:1,
         range: '0..3',
@@ -447,7 +599,10 @@ string6Params = [
         value:null
     },
     {
-        name:'n<sup>A</sup>',
+        name:{
+            value:'n<sup>A</sup>',
+            description:'Слово nA - условный номер НКА в системе, который соответствует номеру занимаемой НКА рабочей точки;'
+        },
         digitsNum: 5,
         lowDigitPrice:1,
         range: '1..24',
@@ -455,7 +610,10 @@ string6Params = [
         value:null
     },
     {
-        name:'τ<sub>n</sub><sup>A</sup>',
+        name:{
+            value:'τ<sub>n</sub><sup>A</sup>',
+            description:'грубое значение сдвига шкалы времени НКА с номером nA относительно шкалы времени системы на момент времени t λn A, равное смещению ПСПД излучаемого навигационного радиосигнала относительно номинального положения, выраженному в единицах времени; '
+        },
         digitsNum: 10,
         lowDigitPrice:'2<sup>-18</sup>',
         range: '±1.9e-3',
@@ -463,7 +621,10 @@ string6Params = [
         value:null
     },
     {
-        name:'λ<sub>n</sub><sup>A</sup>',
+        name:{
+            value:'λ<sub>n</sub><sup>A</sup>',
+            description:'долгота в системе координат ПЗ-90.02 первого внутри суток с номером NA восходящего узла орбиты НКА с номером nA'
+        },
         digitsNum: 21,
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±1',
@@ -471,7 +632,10 @@ string6Params = [
         value:null
     },
     {
-        name:'Δi<sub>n</sub><sup>A</sup>',
+        name:{
+            value:'Δi<sub>n</sub><sup>A</sup>',
+            description:'поправка к среднему значению наклонения орбиты для НКА с номером n A на момент t λn A (среднее значение наклонения орбиты принято равным 63°); '
+        },
         digitsNum: 18,
         lowDigitPrice:'2<sup>-20</sup>',
         range: '±0.067',
@@ -479,7 +643,10 @@ string6Params = [
         value:null
     },
     {
-        name:'ε<sub>n</sub><sup>A</sup>',
+        name:{
+            value:'ε<sub>n</sub><sup>A</sup>',
+            description:'эксцентриситет орбиты НКА с номером nA на момент времени tλnA'
+        },    
         digitsNum: 15,
         lowDigitPrice:'2<sup>-20</sup>',
         range: '0..0.03',
@@ -490,23 +657,32 @@ string6Params = [
 
 string7Params = [
     {
-        name:'hs',
+        name:{
+            value:'hs',
+            description:'Первый символ цифровой информации в каждой строке всегда "0". Он является "холостым" и дополняет укороченную ПСП МВ предыдущей строки до полной (не укороченной) ПС последовательности.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:0
+        value:0,
     },
     {
-        name:'m',
+        name:{
+            value:'m',
+            description:'номер строки в навигационном кадре'
+        },    
         digitsNum: 4,
         lowDigitPrice:1,
         range: '0..15',
         unit: 'безразмерная',
-        value:7
+        value:1,
     },
     {
-        name:'ω<sub>n</sub><sup>A</sup>',
+        name:{
+            value:'ω<sub>n</sub><sup>A</sup>',
+            description:'аргумент перигея орбиты НКА с номером n^A на момент времени tλn^A'
+        },    
         digitsNum: 16,
         lowDigitPrice:'2<sup>-15</sup>',
         range: '±1',
@@ -514,7 +690,10 @@ string7Params = [
         value:null
     },
     {
-        name:'t<sub>λn</sub><sup>A</sup>',
+        name:{
+            value:'t<sub>λn</sub><sup>A</sup>',
+            description:'время прохождения первого внутри суток с номером N^A восходящего узла орбиты НКА с номером n^A'
+        },
         digitsNum: 21,
         lowDigitPrice:'2<sup>-5</sup>',
         range: '0..44100',
@@ -522,7 +701,10 @@ string7Params = [
         value:null
     },
     {
-        name:'ΔT<sub>n</sub><sup>A</sup>',
+        name:{
+            value:'ΔT<sub>n</sub><sup>A</sup>',
+            description:'поправка к среднему значению драконического периода обращения НКА с номером n A на момент времени tλn^A (среднее значение драконического периода обращения НКА принято равным 43200 с);'
+        },    
         digitsNum: 22,
         lowDigitPrice:'2<sup>-9</sup>',
         range: '±3.6e3',
@@ -530,7 +712,10 @@ string7Params = [
         value:null
     },
     {
-        name:"ΔT'<sub>n</sub><sup>A</sup>",
+        name:{
+            value:"ΔT'<sub>n</sub><sup>A</sup>",
+            description:'скорость изменения драконического периода обращения НКА с номером nA'
+        },
         digitsNum: 7,
         lowDigitPrice:'2<sup>-14</sup>',
         range: '±2<sup>-8</sup>',
@@ -538,7 +723,10 @@ string7Params = [
         value:null
     },
     {
-        name:'H<sub>n</sub><sup>A</sup>',
+        name:{
+            value:'H<sub>n</sub><sup>A</sup>',
+            description:'номер несущей частоты навигационного радиосигнала, излучаемого НКА с номером nA'
+        },    
         digitsNum: 5,
         lowDigitPrice:'1',
         range: '0..31',
@@ -546,13 +734,16 @@ string7Params = [
         value:null
     },
     {
-        name:'l<sub>n</sub>',
+        name:{
+            value:'l<sub>n</sub>',
+            description:' признак недостоверности кадра n-го НКА; ln = 0 свидетельствует о пригодности НКА для навигации;  ln = 1 означает факт непригодности данного НКА для навигации.'
+        },
         digitsNum: 1,
         lowDigitPrice:1,
         range: '0;1',
         unit: 'безразмерная',
         value:null
-    }                                
+    }                                   
 ]
 
 function SuperFrame(frameNum){
@@ -652,6 +843,16 @@ function renderTable(string, stringNum, frameNum){
         var row = document.createElement('tr');
         for(key in param){
             var cell = document.createElement('td');
+            if(key == 'name'){
+                var cellParam = document.createElement('a');
+                cellParam.setAttribute('data-toggle','tooltip');
+                cellParam.setAttribute('data-placement','right');
+                cellParam.setAttribute('data-original-title',param[key].description);
+                cellParam.innerHTML = param[key].value;
+                cell.appendChild(cellParam);
+                row.appendChild(cell);
+                continue;
+            }
             if(key == 'value'){
                var cellValue = document.createElement('input');
                cellValue.type = 'number';
@@ -756,4 +957,8 @@ generateStringBtn.addEventListener('click',function(e){
         stringPartElem2.innerHTML = translateToBinary(parseInt(input.value), input.parentElement.parentElement );
         document.querySelector('.working-area__string--binary').appendChild(stringPartElem2);        
     });
+})
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
 })
