@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GNSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/bundle.min.css' />
+  </head>
+  <body>
+    <% include ../partials/header %>
+
+    <div class="container hamming">
+    <h4>Лабораторная работа №3</h4>
+    <p>"Исследование помехоустойчивого кодирования"</p>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#theory" data-toggle="tab" aria-expanded="false">Теория</a></li>
+        <li class=""><a href="#practice" data-toggle="tab" aria-expanded="false">Практика</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="theory">
+          <p>
+            <strong>
+              Цель работы — 
+            </strong>
+          </p>
+        </div>
+        <div class="tab-pane fade" id="practice">
+        <div class="hamming_practice">
+            <p>
+                Введите навигационное сообщение в двоичном виде: 
+            </p>
+            <input type="text" maxlength='77'>
+            <p>
+                <div class="btn hamming_practice__btn">Начать</div>
+            </p>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="/js/bundle.min.js"></script>
+  <script src="/js/hamming.js"></script>
+</html>      
