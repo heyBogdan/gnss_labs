@@ -3,15 +3,16 @@ function HammingLab(option){
     var fullString = null;
     elem.addEventListener('click', function(e){
         if(!e.target.closest('.hamming_practice__btn')) return;
+        document.querySelector('.hamming_practice').innerHTML = '';
         var value = this.querySelector('input').value;
         var correctionSymbolsNum =  countCorrectionSymbolsNum(value.length);
         console.log(correctionSymbolsNum)
         
         var string = createDataSymbols(value);
-        renderTable(string,'Информационные символы');
+        renderTable(string,'Таблица 1 - Информационные символы b<sub>i</sub>');
 
         fullString = addCorrectionSymbols(string, correctionSymbolsNum);
-        renderTable(fullString, 'Информационные и проверочные символы');
+        renderTable(fullString, 'Таблица 2 - Информационные b<sub>i</sub> и проверочные β<sub>i</sub> символы(до вычисления)');
 
         createRadioBtns(correctionSymbolsNum);
 
@@ -26,7 +27,7 @@ function HammingLab(option){
             controlSums[i] = controlSum;
         }
 
-        renderTable(controlSums,'Контрольные суммы')
+        renderTable(controlSums,'Таблица 3 - Контрольные суммы C<sub>i</sub>')
 
         var controlBits = controlSums.slice();
         controlBits.map(function(sum){
@@ -37,8 +38,32 @@ function HammingLab(option){
             return sum;
         })
 
-        renderTable(controlBits, 'Проверочные символы')
+        renderTable(controlBits, 'Таблица 4 - Проверочные символы β<sub>i</sub>');
+
+        var controlSumBit = getControlSumBit(string.concat(controlBits));
+
+        var controlSumElement = document.createElement('div');
+        controlSumElement.classList.add('hamming_practice__text');
+        controlSumElement.innerHTML = 'Суммарный проверочный символ формируется как сумма по mod2 всех информационных и расcчитанных проверочных символов <br> β<sub>' + (correctionSymbolsNum + 1 ) + '</sub>=' + controlSumBit;
+        document.querySelector('.hamming_practice').appendChild(controlSumElement); 
+
+        var allControlBits = controlBits.slice();
+        allControlBits.push({
+            symbol: 'β' + (correctionSymbolsNum + 1),
+            value: controlSumBit
+        })
+
+        renderTable(string.concat(allControlBits), 'Таблица 5 - Информационные b<sub>i</sub> и все рассчитанные проверочные β<sub>i</sub> символы, расположенные согласно структуре навигационной строки' );
+
+
     })
+    function getControlSumBit(data){
+        var result = 0;
+        data.forEach(function(bit){
+            result += bit.value;
+        })
+        return result%2;
+    }
     function countCorrectionSymbolsNum(infoDataNum){
         for(var i = 0; i <= (Math.ceil(Math.log2(infoDataNum)) + 1); i++){
             if ((i + infoDataNum) <= (Math.pow(2,i) - 1)) return i;
@@ -150,5 +175,5 @@ function HammingLab(option){
 }
 
 var hammingLab = new HammingLab({
-    elem: document.querySelector('.hamming_practice')
+    elem: document.querySelector('.hamming_lab')
 })
