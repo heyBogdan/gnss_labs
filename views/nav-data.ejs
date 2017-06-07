@@ -9,8 +9,8 @@
     <% include ../partials/header %>
 
     <div class="container lab-nav-data">
-    <h4>Лабораторная работа №2</h4>
-    <p>"Исследование структуры навигационного сообщения"</p>
+    <h4>Лабораторная работа №1</h4>
+    <p>"Исследование формирователя строки НИ сигнала ГЛОНАСС"</p>
       <ul class="nav nav-tabs">
         <li class="active"><a href="#theory" data-toggle="tab" aria-expanded="false">Теория</a></li>
         <li class=""><a href="#practice" data-toggle="tab" aria-expanded="false">Практика</a></li>
@@ -49,8 +49,27 @@
                 <div id="superFrameWrapper"></div>
               </div>
               <div class="col-lg-8">
-                
-              </div>
+            <div class="working-area">
+                <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th>Слово</th>
+                      <th>Число разр.</th>
+                      <th>Цена мл. разр.</th>
+                      <th>Диапазон зн-ий</th>
+                      <th>Единица из-ия</th>
+                      <th>Значение</th>                  
+                    </tr>
+                  </thead>
+                </table>
+                <a id='generateStringBtn' class='btn working-area__btn' type='submit'>Сформировать строку</a>
+                <div class="working-area__string">
+                    <p><b>В десятичной системе счисления:</b></p>
+                    <div class="working-area__string--decimial"></div>
+                    <p><b>В двоичной системе счисления:</b></p>
+                    <div class="working-area__string--binary"></div>
+                </div>
+            </div>
           </div>
           
         </div>
@@ -62,5 +81,4 @@
 
   <script src="/js/bundle.min.js"></script>
   <script src="/js/nav-data.js"></script>
-  <script src="/js/dsp.js"></script>
 </html>

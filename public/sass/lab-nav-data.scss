@@ -16,13 +16,21 @@
         width:90%;
         margin:0 auto;
     }
+    .table{ 
+        tbody{
+            display: none;
+        }
+        input{
+            width:100px;
+        }    
+    }
     .frame{
         font-size: 16px;
-        line-height: 8vh;
+        line-height: 5vh;
         border: 1px solid #d4d4d4;
-        padding-bottom: 5vh;
+        padding-bottom: 2vh;
         &:hover{
-            background-color: #f4f4f4;
+            background-color: #f4f4f4;  
         }    
     }
     .superframe-list{
@@ -50,5 +58,10 @@
         font-size:1.5rem;
         text-align: justify;
         padding-top: 20px;
+    }
+    .working-area{
+        &__string{
+            padding:25px 15px;
+        }
     }
 }

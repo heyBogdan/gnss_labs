@@ -22,7 +22,8 @@ const paths = {
         './node_modules/jquery/dist/jquery.min.js',
         './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         './node_modules/nouislider/distribute/nouislider.min.js',
-        './node_modules/chart.js/dist/Chart.min.js'
+        './node_modules/chart.js/dist/Chart.min.js',
+        './node_modules/toastr/build/toastr.min.js'
 
     ],
     dist: './dist/js/'

@@ -251,6 +251,7 @@ function  convertRMSToSNR(RMS){
 }
 
 function genCode(){
+	if(document.querySelector('.lab-gnss-signals__UBLMaxElement')) document.querySelector('.lab-gnss-signals__chartwrapper').removeChild(document.querySelector('.lab-gnss-signals__UBLMaxElement'));
 	var ctx1 = document.getElementById("myChart1"),
 		ctx2 = document.getElementById("myChart2"),
 		ctx3 = document.getElementById("myChart3");
@@ -275,7 +276,8 @@ function genCode(){
 			addSignal(signal, gaussNoise);
 	}
 
-	var aCorr = corr(signal, mCode512); 
+	var aCorr = corr(signal, mCode512);
+	normalizeByMax(aCorr); 
 
 	if(lineChart1){
 		lineChart1.clear();
@@ -290,44 +292,55 @@ function genCode(){
 		lineChart2.clear();
 		lineChart2.destroy();
 		
-		lineChart2 = genChart(ctx2, xArgs(aCorr.length), aCorr, "АКФ",color,"№ отсчёта", "E, Дж");
+		lineChart2 = genChart(ctx2, xArgs(aCorr.length), aCorr, "АКФ",color,"№ отсчёта", "ρ");
 	}else{
-		lineChart2 = genChart(ctx2, xArgs(aCorr.length), aCorr, "АКФ",color,"№ отсчёта", "Е, Дж");
+		lineChart2 = genChart(ctx2, xArgs(aCorr.length), aCorr, "АКФ",color,"№ отсчёта", "ρ");
 	}
-	
-	// var mCodeExt = extendArr(mCode512, expansivity); 
+	if(periods == 1){
+		var aCorrForUBL = aCorr.slice();
+		aCorrForUBL.splice(511,1);
+		var UBLMax = Math.max.apply(this, aCorrForUBL);
+		var UBLMaxElement = document.createElement('div');
+		UBLMaxElement.classList.add('lab-gnss-signals__UBLMaxElement');
+		UBLMaxElement.innerHTML = 'Максимальный по модулю выброс боковых лепестков равен ' +  UBLMax;	
+		document.querySelector('.lab-gnss-signals__chartwrapper').insertBefore(UBLMaxElement,document.querySelectorAll('.lab-gnss-signals__chart')[2]);
+		console.log(UBLMax);
+	}
+// 	var mCodeExt = extendArr(mCode512, expansivity); 
 
-	// var signalExt = extendArr(signal, expansivity); 
+// 	var signalExt = extendArr(signal, expansivity); 
 
-	// var aCorrExt = extendArr(aCorr, expansivity);
+// 	var aCorrExt = extendArr(aCorr, expansivity);
 
+// 	addZerosForPow2(aCorrExt, periods);
 
-
-	// var fft = new FFT(aCorrExt.length, 44100);
- //    fft.forward(aCorrExt);
-
-
-	// addZerosForPow2(signal, periods);
-
- // 	var signalExt = extendArr(signal, expansivity);
+// 	var fft = new FFT(aCorrExt.length, 44100);
+//     fft.forward(aCorrExt);
 
 
+// 	// addZerosForPow2(signal, periods);
 
-	// var fft = new FFT(signalExt.length, 44100);
- //    fft.forward(signalExt);
- //    var spectrum = fft.spectrum;
+//  // 	var signalExt = extendArr(signal, expansivity);
 
- //    normalizeByMax(spectrum);
- //    translateToDB(spectrum);
 
-	// if(lineChart3){
-	// 	lineChart3.clear();
-	// 	lineChart3.destroy();
+
+// 	// var fft = new FFT(signalExt.length, 44100);
+//  //    fft.forward(signalExt);
+//     var spectrum = fft.spectrum;
+
+// var f = genFreqArgs(spectrum.length, 44100);
+
+//     normalizeByMax(spectrum);
+//     // translateToDB(spectrum);
+
+// 	if(lineChart3){
+// 		lineChart3.clear();
+// 		lineChart3.destroy();
 		
-	// 	lineChart3 = genChart(ctx3, xArgs(spectrum.length), spectrum, "СПМ",color);
-	// }else{
-	// 	lineChart3 = genChart(ctx3, xArgs(spectrum.length), spectrum, "СПМ",color);
-	// }
+// 		lineChart3 = genChart(ctx3, f, spectrum, "СПМ",color);
+// 	}else{
+// 		lineChart3 = genChart(ctx3, f, spectrum, "СПМ",color);
+// 	}
 }
 
 function genСountDown(ts, fd){
@@ -424,6 +437,7 @@ function formatValue(x, val){
 } 
 
 function genSignal(){
+
 	var ctx1 = document.getElementById("myChart1"),
 		ctx2 = document.getElementById("myChart2"),
 		ctx3 = document.getElementById("myChart3");
@@ -548,6 +562,7 @@ function removeCharts(){
 		lineChart5.clear();
 	
 	}
+	if(document.querySelector('.lab-gnss-signals__UBLMaxElement')) document.querySelector('.lab-gnss-signals__chartwrapper').removeChild(document.querySelector('.lab-gnss-signals__UBLMaxElement'));
 }	
 
 lab_mCode512.onclick = genCode;

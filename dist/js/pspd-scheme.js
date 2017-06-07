@@ -215,7 +215,8 @@ var coderOptions = {
     x: navDataOptions.x + RECTWIDTH + LINELENGTH,
     y: navDataOptions.y,
     content:'Кодер',
-    description:'В каждой строке ЦИ передаются 8 проверочных символов кода Хемминга (КХ), позволяющие производить проверку достоверности символов ЦИ в строк'
+    description:'В каждой строке ЦИ передаются 8 проверочных символов кода Хемминга (КХ), позволяющие производить проверку достоверности символов ЦИ в строк',
+    link:'/glonass/hamming'
 }
 var ofmOptions = {
     x: coderOptions.x + RECTWIDTH + LINELENGTH,
