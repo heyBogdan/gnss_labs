@@ -15,9 +15,13 @@
 	}
 	.image{
 		text-align: center;
-		img{
-		width:70%;
-		}
+
+		margin:15px 0;
+	}
+	.formula{
+		text-align: center;
+		margin:15px 0;
+		font-weight:bold;
 	}
 	&__register{
 		margin:25px 0;
